@@ -9,127 +9,126 @@
       href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
       media="all"
     />
+    <link rel="stylesheet" href="/src/scss/styles.css" media="all" />
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Feed</a>
-        <button
-          class="btn btn-primary ms-auto"
-          data-bs-toggle="modal"
-          data-bs-target="#createPostModal"
-        >
-          Create New Post
-        </button>
-        <form class="d-flex">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search posts"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Sort
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Newest First</a></li>
-              <li><a class="dropdown-item" href="#">Oldest First</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
+  <body class="bg-primary">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+            <div class="container-fluid">
+                <a class="navbar-brand text-warning" href="#">Social Website</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-warning" href="/feed">Feed</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-warning" href="/profile">Profile</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-warning" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sort
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Newest First</a></li>
+                                <li><a class="dropdown-item" href="#">Oldest First</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                        Create New Post
+                    </button>
+                    <form class="d-flex ms-2">
+                        <input class="form-control me-2" type="search" placeholder="Search posts" aria-label="Search" />
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        
+</header>
               <!-- Post -->
     <div class="container mt-4">
       <div class="row">
               <div class="col-12 col-md-6 col-lg-3 mb-3">
-                <div class="card">
-                  <img src="#" class="card-img-top" alt="...">
-                  <div class="card-body">
+                <div class="card bg-warning">
+                  <img src="/assets/images/patrycja-jadach-Ey8ZF6ByZRM-unsplash-min.jpg" class="card-img-top" alt="...">
+                  <div class="card-body bg-secondary">
                     <h5 class="card-title">Post Title</h5>
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos quaerat temporibus aspernatur ipsam! Quis velit, ab consequatur culpa odit voluptatibus fugiat quae ipsam repellat. Fugit, fugiat repellendus. Architecto, placeat eos?</p>
-                    <a href="#" class="btn btn-primary">Read More</a>
+                    <a href="#" class="btn btn-warning">Read More</a>
                   </div>
                 </div>
               </div>
                   <div class="col-12 col-md-6 col-lg-3 mb-3">
-                    <div class="card">
-                      <img src="#" class="card-img-top" alt="...">
-                      <div class="card-body">
+                    <div class="card bg-warning">
+                      <img src="/assets/images/patrycja-jadach-Ey8ZF6ByZRM-unsplash-min.jpg" class="card-img-top" alt="...">
+                      <div class="card-body bg-secondary">
                         <h5 class="card-title">Post Title</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos quaerat temporibus aspernatur ipsam! Quis velit, ab consequatur culpa odit voluptatibus fugiat quae ipsam repellat. Fugit, fugiat repellendus. Architecto, placeat eos?</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="#" class="btn btn-warning">Read More</a>
                       </div>
                     </div>
                   </div>
                       <div class="col-12 col-md-6 col-lg-3 mb-3">
-                        <div class="card">
-                          <img src="#" class="card-img-top" alt="...">
-                          <div class="card-body">
+                        <div class="card bg-warning">
+                          <img src="/assets/images/patrycja-jadach-Ey8ZF6ByZRM-unsplash-min.jpg" class="card-img-top" alt="...">
+                          <div class="card-body bg-secondary">
                             <h5 class="card-title">Post Title</h5>
                             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos quaerat temporibus aspernatur ipsam! Quis velit, ab consequatur culpa odit voluptatibus fugiat quae ipsam repellat. Fugit, fugiat repellendus. Architecto, placeat eos?</p>
-                            <a href="#" class="btn btn-primary">Read More</a>
+                            <a href="#" class="btn btn-warning">Read More</a>
                           </div>
                         </div>
                       </div>
                           <div class="col-12 col-md-6 col-lg-3 mb-3">
-                            <div class="card">
-                              <img src="#" class="card-img-top" alt="...">
-                              <div class="card-body">
+                            <div class="card bg-warning">
+                              <img src="/assets/images/patrycja-jadach-Ey8ZF6ByZRM-unsplash-min.jpg" class="card-img-top" alt="...">
+                              <div class="card-body bg-secondary">
                                 <h5 class="card-title">Post Title</h5>
                                 <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos quaerat temporibus aspernatur ipsam! Quis velit, ab consequatur culpa odit voluptatibus fugiat quae ipsam repellat. Fugit, fugiat repellendus. Architecto, placeat eos?</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
+                                <a href="#" class="btn btn-warning">Read More</a>
                               </div>
                             </div>
                           </div>
                               <div class="col-12 col-md-6 col-lg-3 mb-3">
-                                <div class="card">
-                                  <img src="#" class="card-img-top" alt="...">
-                                  <div class="card-body">
+                                <div class="card bg-warning">
+                                  <img src="/assets/images/patrycja-jadach-Ey8ZF6ByZRM-unsplash-min.jpg" class="card-img-top" alt="...">
+                                  <div class="card-body bg-secondary">
                                     <h5 class="card-title">Post Title</h5>
                                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos quaerat temporibus aspernatur ipsam! Quis velit, ab consequatur culpa odit voluptatibus fugiat quae ipsam repellat. Fugit, fugiat repellendus. Architecto, placeat eos?</p>
-                                    <a href="#" class="btn btn-primary">Read More</a>
+                                    <a href="#" class="btn btn-warning">Read More</a>
                                   </div>
                                 </div>
                               </div>
                                   <div class="col-12 col-md-6 col-lg-3 mb-3">
-                                    <div class="card">
-                                      <img src="#" class="card-img-top" alt="...">
-                                      <div class="card-body">
+                                    <div class="card bg-warning">
+                                      <img src="/assets/images/patrycja-jadach-Ey8ZF6ByZRM-unsplash-min.jpg" class="card-img-top" alt="...">
+                                      <div class="card-body bg-secondary">
                                         <h5 class="card-title">Post Title</h5>
                                         <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos quaerat temporibus aspernatur ipsam! Quis velit, ab consequatur culpa odit voluptatibus fugiat quae ipsam repellat. Fugit, fugiat repellendus. Architecto, placeat eos?</p>
-                                        <a href="#" class="btn btn-primary">Read More</a>
+                                        <a href="#" class="btn btn-warning">Read More</a>
                                       </div>
                                     </div>
                                   </div>
                                       <div class="col-12 col-md-6 col-lg-3 mb-3">
-                                        <div class="card">
-                                          <img src="#" class="card-img-top" alt="...">
-                                          <div class="card-body">
+                                        <div class="card bg-warning">
+                                          <img src="/assets/images/patrycja-jadach-Ey8ZF6ByZRM-unsplash-min.jpg" class="card-img-top" alt="...">
+                                          <div class="card-body bg-secondary">
                                             <h5 class="card-title">Post Title</h5>
                                             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos quaerat temporibus aspernatur ipsam! Quis velit, ab consequatur culpa odit voluptatibus fugiat quae ipsam repellat. Fugit, fugiat repellendus. Architecto, placeat eos?</p>
-                                            <a href="#" class="btn btn-primary">Read More</a>
+                                            <a href="#" class="btn btn-warning">Read More</a>
                                           </div>
                                         </div>
                                       </div>
                                           <div class="col-12 col-md-6 col-lg-3 mb-3">
-                                            <div class="card">
-                                              <img src="#" class="card-img-top" alt="...">
-                                              <div class="card-body">
+                                            <div class="card bg-warning">
+                                              <img src="/assets/images/patrycja-jadach-Ey8ZF6ByZRM-unsplash-min.jpg" class="card-img-top" alt="...">
+                                              <div class="card-body bg-secondary">
                                                 <h5 class="card-title">Post Title</h5>
                                                 <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos quaerat temporibus aspernatur ipsam! Quis velit, ab consequatur culpa odit voluptatibus fugiat quae ipsam repellat. Fugit, fugiat repellendus. Architecto, placeat eos?</p>
-                                                <a href="#" class="btn btn-primary">Read More</a>
+                                                <a href="#" class="btn btn-warning">Read More</a>
                                               </div>
                                             </div>
                                           </div>
@@ -189,6 +188,72 @@
         </div>
       </div>
     </div>
+
+    <footer class="text-center text-lg-start bg-secondary text-muted">
+        <section
+          class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom border-warning"
+        >
+          <div class="me-5 d-none d-lg-block text-warning">
+            <span>Connect with us on social media:</span>
+          </div>
+  
+          <div>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </section>
+  
+        <section>
+          <div class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                <h6 class="text-uppercase fw-bold mb-4 text-warning">
+                  <i class="fas fa-gem me-3"></i>Social Website
+                </h6>
+                <p class="text-warning">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+                  dicta numquam nesciunt cumque facere iusto suscipit nulla.
+                  Aliquam, fuga provident. Non excepturi asperiores minus
+                  temporibus earum architecto explicabo dolor recusandae?
+                </p>
+              </div>
+  
+              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                <h6 class="text-uppercase fw-bold mb-4 text-warning">Products</h6>
+                <p>
+                  <a href="#" class="link-warning">Test</a>
+                </p>
+                <p>
+                  <a href="#" class="link-warning">Test</a>
+                </p>
+                <p>
+                  <a href="#" class="link-warning">Test</a>
+                </p>
+                <p>
+                  <a href="#" class="link-warning">Test</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+  
+        <div
+          class="text-center p-4 text-warning"
+          style="background-color: rgba(0, 0, 0, 0.05)"
+        >
+          © 2024 Social Website, Inc
+        </div>
+      </footer>
 
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   </body>
