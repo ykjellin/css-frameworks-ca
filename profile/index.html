@@ -3,24 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Profile</title>
+    <title>Bump User Profile</title>
     <link
       rel="stylesheet"
       href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
       media="all"
     />
     <link rel="stylesheet" href="/src/scss/styles.css" media="all" />
-    <link
-      href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
-      rel="stylesheet"
-      media="all"
-    />
+    <script
+      src="https://kit.fontawesome.com/053b40ce4e.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/scripts/script.js"></script>
   </head>
   <body class="bg-primary">
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="container-fluid">
-          <a class="navbar-brand text-warning" href="#">Social Website</a>
+          <img
+            class="navbar-brand logo"
+            src="/assets/images/bump-logo-v2.png"
+            alt="logo"
+          />
           <button
             class="navbar-toggler"
             type="button"
@@ -34,8 +38,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link text-warning" href="/feed">Feed</a>
-              <a class="nav-link text-warning" href="/profile">Profile</a>
+              <a class="nav-link text-warning navigation-text" href="/feed"
+                >Feed</a
+              >
+              <a class="nav-link text-warning navigation-text" href="/profile"
+                >Profile</a
+              >
             </div>
           </div>
         </div>
@@ -44,12 +52,13 @@
     <div class="container">
       <!-- Header -->
       <div class="text-center mt-5">
-        <img
-          src="/assets/images/dmitry-vechorko-CKkXOUtXyi4-unsplash.jpg"
-          class="rounded-circle"
-          alt="Profile Image"
-          style="width: 150px; height: 150px"
-        />
+        <div class="profile-wrap">
+          <img
+            src="/assets/images/dmitry-vechorko-CKkXOUtXyi4-unsplash.jpg"
+            class="rounded-circle profile-image"
+            alt="Profile Image"
+          />
+        </div>
         <h2>Username</h2>
       </div>
 
@@ -72,7 +81,7 @@
               alt="User Post"
             />
             <div class="card-body">
-              <p class="card-text">Post description...</p>
+              <p class="card-text">Here goes post description...</p>
             </div>
           </div>
         </div>
@@ -84,7 +93,7 @@
               alt="User Post"
             />
             <div class="card-body">
-              <p class="card-text">Post description...</p>
+              <p class="card-text">Here goes post description...</p>
             </div>
           </div>
         </div>
@@ -96,7 +105,7 @@
               alt="User Post"
             />
             <div class="card-body">
-              <p class="card-text">Post description...</p>
+              <p class="card-text">Here goes post description....</p>
             </div>
           </div>
         </div>
@@ -108,7 +117,7 @@
               alt="User Post"
             />
             <div class="card-body">
-              <p class="card-text">Post description...</p>
+              <p class="card-text">Here goes post description...</p>
             </div>
           </div>
         </div>
@@ -120,7 +129,7 @@
               alt="User Post"
             />
             <div class="card-body">
-              <p class="card-text">Post description...</p>
+              <p class="card-text">Here goes post description...</p>
             </div>
           </div>
         </div>
@@ -132,7 +141,7 @@
               alt="User Post"
             />
             <div class="card-body">
-              <p class="card-text">Post description...</p>
+              <p class="card-text">Here goes post description...</p>
             </div>
           </div>
         </div>
@@ -144,7 +153,7 @@
               alt="User Post"
             />
             <div class="card-body">
-              <p class="card-text">Post description...</p>
+              <p class="card-text">Here goes post description...</p>
             </div>
           </div>
         </div>
@@ -156,7 +165,7 @@
               alt="User Post"
             />
             <div class="card-body">
-              <p class="card-text">Post description...</p>
+              <p class="card-text">Here goes post description...</p>
             </div>
           </div>
         </div>
@@ -172,8 +181,8 @@
         </div>
 
         <div>
-          <a href="" class="me-4 text-reset">
-            <i class="fab fa-facebook-f"></i>
+          <a href="https://www.facebook.com/" class="me-4 text-reset">
+            <i class="fab fa-facebook"></i>
           </a>
           <a href="" class="me-4 text-reset">
             <i class="fab fa-twitter"></i>
@@ -221,10 +230,13 @@
         </div>
       </section>
 
-      <div
-        class="text-center p-4 text-warning"
-        style="background-color: rgba(0, 0, 0, 0.05)"
-      >
+      <div id="trademark-text" class="text-center p-4 text-warning">
+        <a
+          class="link-warning"
+          href="https://www.flaticon.com/free-icons/type"
+          title="type icons"
+          >Type icons created by xnimrodx - Flaticon</a
+        >
         © 2024 Social Website, Inc
       </div>
     </footer>

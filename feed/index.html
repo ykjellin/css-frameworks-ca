@@ -3,31 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feed Page</title>
+    <title>Bump Feed Page</title>
     <link
       rel="stylesheet"
       href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
       media="all"
     />
     <link rel="stylesheet" href="/src/scss/styles.css" media="all" />
+    <script
+    src="https://kit.fontawesome.com/053b40ce4e.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="/scripts/script.js"></script>
   </head>
   <body class="bg-primary">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
             <div class="container-fluid">
-                <a class="navbar-brand text-warning" href="#">Social Website</a>
+              <img
+              class="navbar-brand logo"
+              src="/assets/images/bump-logo-v2.png"
+              alt="logo"
+            />
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
+                        <li class="nav-item navigation-text">
                             <a class="nav-link text-warning" href="/feed">Feed</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item navigation-text">
                             <a class="nav-link text-warning" href="/profile">Profile</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown navigation-text navigation-sort">
                             <a class="nav-link dropdown-toggle text-warning" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Sort
                             </a>
@@ -190,70 +199,73 @@
     </div>
 
     <footer class="text-center text-lg-start bg-secondary text-muted">
-        <section
-          class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom border-warning"
-        >
-          <div class="me-5 d-none d-lg-block text-warning">
-            <span>Connect with us on social media:</span>
-          </div>
-  
-          <div>
-            <a href="" class="me-4 text-reset">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="" class="me-4 text-reset">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="" class="me-4 text-reset">
-              <i class="fab fa-google"></i>
-            </a>
-            <a href="" class="me-4 text-reset">
-              <i class="fab fa-instagram"></i>
-            </a>
-          </div>
-        </section>
-  
-        <section>
-          <div class="container text-center text-md-start mt-5">
-            <div class="row mt-3">
-              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <h6 class="text-uppercase fw-bold mb-4 text-warning">
-                  <i class="fas fa-gem me-3"></i>Social Website
-                </h6>
-                <p class="text-warning">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
-                  dicta numquam nesciunt cumque facere iusto suscipit nulla.
-                  Aliquam, fuga provident. Non excepturi asperiores minus
-                  temporibus earum architecto explicabo dolor recusandae?
-                </p>
-              </div>
-  
-              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 class="text-uppercase fw-bold mb-4 text-warning">Products</h6>
-                <p>
-                  <a href="#" class="link-warning">Test</a>
-                </p>
-                <p>
-                  <a href="#" class="link-warning">Test</a>
-                </p>
-                <p>
-                  <a href="#" class="link-warning">Test</a>
-                </p>
-                <p>
-                  <a href="#" class="link-warning">Test</a>
-                </p>
-              </div>
+      <section
+        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom border-warning"
+      >
+        <div class="me-5 d-none d-lg-block text-warning">
+          <span>Connect with us on social media:</span>
+        </div>
+
+        <div>
+          <a href="https://www.facebook.com/" class="me-4 text-reset">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <div class="container text-center text-md-start mt-5">
+          <div class="row mt-3">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4 text-warning">
+                <i class="fas fa-gem me-3"></i>Social Website
+              </h6>
+              <p class="text-warning">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+                dicta numquam nesciunt cumque facere iusto suscipit nulla.
+                Aliquam, fuga provident. Non excepturi asperiores minus
+                temporibus earum architecto explicabo dolor recusandae?
+              </p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4 text-warning">Products</h6>
+              <p>
+                <a href="#" class="link-warning">Test</a>
+              </p>
+              <p>
+                <a href="#" class="link-warning">Test</a>
+              </p>
+              <p>
+                <a href="#" class="link-warning">Test</a>
+              </p>
+              <p>
+                <a href="#" class="link-warning">Test</a>
+              </p>
             </div>
           </div>
-        </section>
-  
-        <div
-          class="text-center p-4 text-warning"
-          style="background-color: rgba(0, 0, 0, 0.05)"
-        >
-          © 2024 Social Website, Inc
         </div>
-      </footer>
+      </section>
+
+      <div id="trademark-text" class="text-center p-4 text-warning">
+        <a
+          class="link-warning"
+          href="https://www.flaticon.com/free-icons/type"
+          title="type icons"
+          >Type icons created by xnimrodx - Flaticon</a
+        >
+        © 2024 Social Website, Inc
+      </div>
+    </footer>
 
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   </body>

@@ -1,5 +1,46 @@
-@use "base";
-@use "layout";
-@use "utilites";
+$body-color: #f4d615;
+$primary: #30302f;
+$secondary: #585755;
+$danger: #f4d615;
+
+#trademark-text {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  max-height: 10vh;
+  max-width: auto;
+  object-fit: contain;
+}
+
+.navigation-text {
+  font-size: 1.5rem;
+  padding-left: 2rem;
+}
+
+.navigation-sort {
+  font-weight: 100;
+}
+
+.profile-wrap {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+  line-height: 0;
+}
+
+.profile-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+footer {
+  margin-top: 3rem;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
