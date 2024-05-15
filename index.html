@@ -28,7 +28,7 @@
     ></script>
     <script src="/scripts/script.js"></script>
   </head>
-  <body class="bg-primary">
+  <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="container-fluid">
@@ -140,13 +140,25 @@
             <div class="modal-body">
               <form id="registrationForm">
                 <div class="mb-3">
+                  <label for="registerUsername" class="form-label display-6"
+                    >Username</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control custom-text-color"
+                    id="registerUsername"
+                    placeholder="Enter username"
+                  />
+                </div>
+                <div class="mb-3">
                   <label for="registerEmail" class="form-label display-6"
                     >Email address</label
                   >
                   <input
                     type="email"
-                    class="form-control"
+                    class="form-control custom-text-color"
                     id="registerEmail"
+                    placeholder="Enter email address"
                     aria-describedby="emailHelp"
                   />
                 </div>
@@ -156,8 +168,9 @@
                   >
                   <input
                     type="password"
-                    class="form-control"
+                    class="form-control custom-text-color"
                     id="registerPassword"
+                    placeholder="Enter password"
                   />
                 </div>
                 <div class="mb-3">
@@ -166,14 +179,16 @@
                   >
                   <input
                     type="password"
-                    class="form-control"
+                    class="form-control custom-text-color"
                     id="confirmPassword"
+                    placeholder="Re-enter password"
                   />
                 </div>
                 <button type="submit" class="btn btn-warning btn-lg">
                   Register
                 </button>
               </form>
+              <div class="errorMessage text-danger mt-3"></div>
             </div>
           </div>
         </div>
@@ -251,5 +266,6 @@
       </div>
     </footer>
     <!--  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+    <script type="module" src="/src/js/index.mjs"></script>
   </body>
 </html>

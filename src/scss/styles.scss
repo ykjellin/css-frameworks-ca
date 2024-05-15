@@ -1,7 +1,15 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
 $body-color: #f4d615;
 $primary: #30302f;
 $secondary: #585755;
 $danger: #f4d615;
+$custom-text-color: #000000;
+
+body {
+  background-color: $primary;
+  color: $body-color;
+}
 
 #trademark-text {
   background-color: rgba(0, 0, 0, 0.05);
@@ -41,10 +49,12 @@ $danger: #f4d615;
   object-fit: cover;
 }
 
+.custom-text-color {
+  color: $custom-text-color;
+}
+
 footer {
   margin-top: 3rem;
   opacity: 0;
   transition: opacity 0.5s ease-out;
 }
-
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
