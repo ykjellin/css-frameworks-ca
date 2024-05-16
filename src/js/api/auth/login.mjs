@@ -5,21 +5,42 @@ const action = "/auth/login";
 const method = "post";
 const loginURL = `${API_SOCIAL}${action}`;
 
-export async function login(credentials) {
+export async function handleLoginSubmit(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  const credentials = { email, password };
+
+  try {
+    const loginResponse = await login(credentials);
+    console.log("Login successful", loginResponse);
+    saveLocal("accessToken", loginResponse.accessToken);
+    window.location.href = "/profile/";
+  } catch (error) {
+    console.error("Error during login:", error);
+    const errorMessage = document.querySelector(".errorMessage");
+    if (errorMessage) {
+      errorMessage.textContent = error.message;
+    }
+  }
+}
+
+async function login(credentials) {
   const errorMessage = document.querySelector(".errorMessage");
-  console.log("Error message element:", errorMessage);
 
   try {
     const body = JSON.stringify(credentials);
-    console.log("Request body:", body);
-
     const response = await fetch(loginURL, {
       headers: {
         "Content-Type": "application/json",
       },
-      method,
-      body,
+      method: "POST",
+      body: body,
     });
+
+    console.log("Credentials being sent:", credentials);
+    console.log("Body being sent:", body);
 
     if (!response.ok) {
       const errorData = await response.json();

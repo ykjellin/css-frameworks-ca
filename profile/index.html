@@ -65,21 +65,31 @@
       <!-- Header -->
       <div class="text-center mt-5">
         <div class="profile-wrap">
-          <img
-            src="/assets/images/dmitry-vechorko-CKkXOUtXyi4-unsplash.jpg"
-            class="rounded-circle profile-image"
-            alt="Profile Image"
-          />
+          <img id="profileImage" class="rounded-circle profile-image" alt="Profile Image" />
         </div>
-        <h2>Username</h2>
+        <h2 id="username"></h2>
+        <p id="email"></p>
       </div>
 
       <!-- Followers/Following -->
       <div class="d-flex justify-content-center mt-3">
-        <button class="btn btn-warning me-2">Follow</button>
-        <div><strong>120</strong> followers</div>
-        <div class="ms-2"><strong>150</strong> following</div>
+        <button id="followButton" class="btn btn-warning me-2">Follow</button>
+        <button id="unfollowButton" class="btn btn-warning me-2">Unfollow</button>
+        <div><strong id="followersCount"></strong> followers</div>
+        <div class="ms-2"><strong id="followingCount"></strong> following</div>
       </div>
+
+      <!-- Followers -->
+<div class="mt-5">
+  <h3>Followers</h3>
+  <div id="followersContainer"></div>
+</div>
+
+<!-- Following -->
+<div class="mt-5">
+  <h3>Following</h3>
+  <div id="followingContainer"></div>
+</div>
 
       <!-- Posts -->
       <div class="row mt-5">
@@ -256,5 +266,6 @@
     </footer>
 
 <!--    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+<script type="module" src="/src/js/index.mjs"></script>
   </body>
 </html>

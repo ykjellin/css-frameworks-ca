@@ -26,7 +26,7 @@
       src="https://kit.fontawesome.com/053b40ce4e.js"
       crossorigin="anonymous"
     ></script>
-    <script src="/scripts/script.js"></script>
+    <!--<script src="/scripts/script.js"></script>-->
   </head>
   <body>
     <header>
@@ -73,7 +73,7 @@
             <div class="card bg-secondary">
               <div class="card-header display-2">Login</div>
               <div class="card-body">
-                <form id="loginForm" action="/profile" method="POST">
+                <form id="loginForm" action="/social/auth/login" method="POST">
                   <div class="mb-3">
                     <label for="loginEmail" class="form-label fs-4"
                       >Email address</label
@@ -82,7 +82,9 @@
                       type="email"
                       class="form-control text-dark"
                       id="loginEmail"
+                      name="email"
                       aria-describedby="emailHelp"
+                      required
                     />
                   </div>
                   <div class="mb-3">
@@ -93,6 +95,8 @@
                       type="password"
                       class="form-control text-dark"
                       id="loginPassword"
+                      name="password"
+                      required
                     />
                   </div>
                   <button type="submit" class="btn btn-warning btn-lg">
