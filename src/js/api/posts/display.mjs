@@ -17,7 +17,12 @@ export function displayPosts(
     const postCreated = postCard.querySelector(".text-muted");
     const postCommentsCount = postCard.querySelector(".comments-count");
     const postReactionsCount = postCard.querySelector(".reactions-count");
+
     const readMoreButton = postCard.querySelector(".read-more-btn");
+    readMoreButton.setAttribute("data-post-id", post.id);
+    readMoreButton.addEventListener("click", () => {
+      openPostModal(post);
+    });
 
     postImage.src = post.media;
     postTitle.textContent = post.title;
@@ -27,14 +32,9 @@ export function displayPosts(
     ).toLocaleDateString()}`;
     postCommentsCount.textContent = `Comments: ${post._count.comments}`;
     postReactionsCount.textContent = `Reactions: ${post._count.reactions}`;
-    readMoreButton.setAttribute("data-post-id", post.id);
-    readMoreButton.addEventListener("click", () => {
-      openPostModal(post);
-    });
 
     container.appendChild(postElement);
   });
-
   currentOffset += posts.length;
 
   const previousLoadMoreButton = container.querySelector(".load-more-btn");

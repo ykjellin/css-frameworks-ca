@@ -30,3 +30,18 @@ export async function getPosts(
     throw error;
   }
 }
+
+export async function getPostById(postId) {
+  try {
+    const response = await authFetch(`${API_SOCIAL}/posts/${postId}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    const post = await response.json();
+    console.log("Post fetched:", post);
+    return post;
+  } catch (error) {
+    console.error("Failed to fetch post:", error.message);
+    throw error;
+  }
+}

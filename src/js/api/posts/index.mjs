@@ -1,4 +1,4 @@
-import { getPosts } from "./get.mjs";
+import { getPosts, getPostById } from "./get.mjs";
 import { displayPosts } from "./display.mjs";
 import { loadMorePosts } from "./load.mjs";
 import { openPostModal } from "./postModal.mjs";
@@ -75,6 +75,18 @@ document.addEventListener("DOMContentLoaded", () => {
       fetchPosts();
     }
 
+    async function handleViewPostClick(event) {
+      const postId = event.target.getAttribute("data-post-id");
+      if (postId) {
+        try {
+          const post = await getPostById(postId);
+          openPostModal(post);
+        } catch (error) {
+          console.error("Error fetching post details:", error);
+        }
+      }
+    }
+
     if (reactionsFilter) {
       reactionsFilter.addEventListener("change", handleFilterChange);
     }
@@ -83,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     searchForm.addEventListener("submit", handleSearch);
+    container.addEventListener("click", handleViewPostClick);
 
     await fetchPosts();
   })();
