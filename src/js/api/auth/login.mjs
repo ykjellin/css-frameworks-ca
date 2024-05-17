@@ -16,6 +16,7 @@ export async function handleLoginSubmit(event) {
     const loginResponse = await login(credentials);
     console.log("Login successful", loginResponse);
     saveLocal("accessToken", loginResponse.accessToken);
+    saveLocal("name", loginResponse.name);
     window.location.href = "/profile/";
   } catch (error) {
     console.error("Error during login:", error);

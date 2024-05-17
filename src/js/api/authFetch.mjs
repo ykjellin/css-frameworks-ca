@@ -1,4 +1,4 @@
-import { getLocal } from "./storage/storage.mjs";
+import { getLocal } from "../storage/storage.mjs";
 
 export function headers() {
   const token = getLocal("accessToken");
@@ -9,9 +9,14 @@ export function headers() {
 }
 
 export async function authFetch(url, options = {}) {
+  const defaultHeaders = headers();
+  const combinedHeaders = options.headers
+    ? { ...defaultHeaders, ...options.headers }
+    : defaultHeaders;
+
   return fetch(url, {
     ...options,
-    headers: headers(),
+    headers: combinedHeaders,
   });
 }
 
