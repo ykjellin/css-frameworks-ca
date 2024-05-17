@@ -97,6 +97,45 @@
         </div>
       </nav>
     </header>
+    <div class="filter-container">
+      <button
+        class="btn btn-primary filter-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#filterCollapse"
+        aria-expanded="false"
+        aria-controls="filterCollapse"
+      >
+        Filter
+      </button>
+    </div>
+
+    <div class="collapse filter-options" id="filterCollapse">
+      <div class="filter-options-content">
+        <div class="mb-3">
+          <label for="reactionsFilter" class="form-label"
+            >Filter by Reactions:</label
+          >
+          <select class="form-select" id="reactionsFilter">
+            <option value="">All Reactions</option>
+            <option value="1">1+</option>
+            <option value="5">5+</option>
+            <option value="10">10+</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="commentsFilter" class="form-label"
+            >Filter by Comments:</label
+          >
+          <select class="form-select" id="commentsFilter">
+            <option value="">All Comments</option>
+            <option value="1">1+</option>
+            <option value="5">5+</option>
+            <option value="10">10+</option>
+          </select>
+        </div>
+      </div>
+    </div>
     <div class="container mt-4">
       <div class="row" id="postsContainer">
         <!-- Post Card Template -->
