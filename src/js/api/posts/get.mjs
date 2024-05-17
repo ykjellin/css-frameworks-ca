@@ -3,9 +3,19 @@ import { authFetch } from "../authFetch.mjs";
 
 export const action = "/posts";
 
-export async function getPosts(limit = 20, offset = 0) {
-  const queryParams = `?limit=${limit}&offset=${offset}`;
-  const url = `${API_SOCIAL}${action}${queryParams}`;
+export async function getPosts(
+  limit,
+  offset,
+  includeComments,
+  includeReactions
+) {
+  let url = `${API_SOCIAL}/posts?limit=${limit}&offset=${offset}`;
+  if (includeComments) {
+    url += `&_comments=true`;
+  }
+  if (includeReactions) {
+    url += `&_reactions=true`;
+  }
 
   try {
     const response = await authFetch(url);
