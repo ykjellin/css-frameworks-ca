@@ -53,6 +53,58 @@ body {
   color: $custom-text-color;
 }
 
+.post-card {
+  background-color: $secondary;
+  color: $body-color;
+}
+
+.post-meta {
+  color: $body-color !important;
+}
+
+.post-footer {
+  background-color: $secondary;
+  color: $body-color;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filter-options {
+  display: flex;
+  justify-content: center;
+}
+
+.filter-options-content {
+  width: 300px;
+  padding: 20px;
+  background-color: $primary;
+  border: 1px solid $body-color;
+  border-radius: 4px;
+}
+
+.read-more-btn,
+.load-more-btn,
+.filter-button {
+  background-color: $body-color;
+  color: #000000;
+  border-color: $body-color;
+}
+
+.read-more-btn:hover,
+.load-more-btn:hover,
+.filter-button:hover {
+  background-color: darken($body-color, 10%);
+  border-color: darken($body-color, 10%);
+}
+
+.modal-content-custom {
+  background-color: $secondary;
+}
+
 footer {
   margin-top: 3rem;
   opacity: 0;
