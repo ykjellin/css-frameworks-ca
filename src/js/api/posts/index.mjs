@@ -8,6 +8,7 @@ const PAGE_SIZE = 20;
 let currentOffset = 0;
 let currentReactions = "";
 let currentComments = "";
+let currentSearchQuery = "";
 
 document.addEventListener("DOMContentLoaded", () => {
   (async () => {
@@ -15,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const postTemplate = document.getElementById("postTemplate");
     const reactionsFilter = document.getElementById("reactionsFilter");
     const commentsFilter = document.getElementById("commentsFilter");
+    const searchForm = document.getElementById("searchForm");
+    const searchInput = document.getElementById("searchInput");
 
     async function fetchPosts() {
       try {
@@ -27,11 +30,22 @@ document.addEventListener("DOMContentLoaded", () => {
           includeComments,
           includeReactions
         );
-        const filteredPosts = applyFilters(
+        let filteredPosts = applyFilters(
           posts,
           currentReactions,
           currentComments
         );
+
+        if (currentSearchQuery) {
+          filteredPosts = filteredPosts.filter(
+            (post) =>
+              post.title
+                .toLowerCase()
+                .includes(currentSearchQuery.toLowerCase()) ||
+              post.body.toLowerCase().includes(currentSearchQuery.toLowerCase())
+          );
+        }
+
         displayPosts(
           filteredPosts,
           container,
@@ -53,12 +67,22 @@ document.addEventListener("DOMContentLoaded", () => {
       fetchPosts();
     }
 
+    function handleSearch(event) {
+      event.preventDefault();
+      currentSearchQuery = searchInput.value.trim();
+      currentOffset = 0;
+      container.innerHTML = "";
+      fetchPosts();
+    }
+
     if (reactionsFilter) {
       reactionsFilter.addEventListener("change", handleFilterChange);
     }
     if (commentsFilter) {
       commentsFilter.addEventListener("change", handleFilterChange);
     }
+
+    searchForm.addEventListener("submit", handleSearch);
 
     await fetchPosts();
   })();

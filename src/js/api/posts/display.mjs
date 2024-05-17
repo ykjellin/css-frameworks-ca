@@ -1,3 +1,5 @@
+import { openPostModal } from "./postModal.mjs";
+
 export function displayPosts(
   posts,
   container,
