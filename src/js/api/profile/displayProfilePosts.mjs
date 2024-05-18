@@ -1,7 +1,6 @@
-import { openModal } from "../posts/postModal.mjs";
+import { openModal } from "../posts/postModal.mjs"; // Reuse the openModal function from posts
 
-function createPostElement(post) {
-  const postTemplate = document.getElementById("postTemplate");
+function createPostElement(post, postTemplate) {
   if (!postTemplate || !postTemplate.content) {
     throw new Error("Post template is not defined or is invalid.");
   }
@@ -14,7 +13,7 @@ function createPostElement(post) {
   const postItem = postElement.querySelector(".post");
 
   postItem.setAttribute("data-post-id", post.id);
-  postImage.src = post.media;
+  postImage.src = post.media || "path/to/default/image.jpg"; // Use a default image if none is provided
   postTitle.textContent = post.title;
   postBody.textContent = post.body;
 
@@ -58,16 +57,12 @@ export function displayProfilePosts(
   loadMoreProfilePosts,
   userName
 ) {
-  console.log("Posts:", posts); // Debugging line
-  console.log("Container:", container); // Debugging line
-
-  container.innerHTML = "";
-
+  console.log("Displaying posts:", posts); // Debugging line
   posts.forEach((post) => {
-    const postElement = createPostElement(post);
-    console.log("Post Element:", postElement); // Debugging line
+    const postElement = createPostElement(post, postTemplate);
     container.appendChild(postElement);
   });
+  currentOffset += posts.length;
 
   const previousLoadMoreButton = container.querySelector(".load-more-btn");
   if (previousLoadMoreButton) {

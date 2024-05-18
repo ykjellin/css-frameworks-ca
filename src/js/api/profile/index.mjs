@@ -1,53 +1,47 @@
-import { fetchAndDisplayProfile } from "./display.mjs";
-import { handleFollow } from "./follow.mjs";
-import { handleUnfollow } from "./unfollow.mjs";
-import { updateProfileMedia } from "./update.mjs";
-import { validateImage } from "./imageValidation.mjs";
-import { getLocal } from "../../storage/storage.mjs";
-import { authFetch } from "../authFetch.mjs";
+import { fetchAndFilterPosts } from "../../handlers/fetchAndFilterPosts.mjs";
+import { setupEventListeners } from "../../handlers/setupEventListeners.mjs";
+import { setupCreatePostModal } from "../posts/create.mjs";
 
-async function init() {
-  const accessToken = getLocal("accessToken");
-  const username = getLocal("name");
-  if (!accessToken) {
-    console.error("No access token available.");
-    return;
+document.addEventListener("DOMContentLoaded", () => {
+  (async () => {
+    const container = document.getElementById("postsContainer");
+    const postTemplate = document.getElementById("postTemplate");
+
+    // Log to check if postTemplate is defined
+    console.log("Post template:", postTemplate);
+
+    if (!postTemplate) {
+      console.error("Post template not found in the DOM.");
+      return;
+    }
+
+    const reactionsFilter = document.getElementById("reactionsFilter");
+    const commentsFilter = document.getElementById("commentsFilter");
+    const searchForm = document.getElementById("searchForm");
+    const searchInput = document.getElementById("searchInput");
+    const updatePostForm = document.getElementById("updatePostForm");
+
+    setupEventListeners(
+      container,
+      reactionsFilter,
+      commentsFilter,
+      searchForm,
+      searchInput,
+      updatePostForm
+    );
+    await fetchAndFilterPosts(
+      container,
+      postTemplate,
+      reactionsFilter,
+      commentsFilter
+    );
+    setupCreatePostModal();
+  })();
+
+  const closeButton = document.querySelector(".button-close");
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
+      location.reload();
+    });
   }
-
-  if (!name) {
-    console.error("No name available.");
-    return;
-  }
-  try {
-    const userResponse = await authFetch(`/social/profiles/${name}`);
-    if (!userResponse.ok) throw new Error("Failed to fetch logged-in user");
-    const loggedInUser = await userResponse.json();
-
-    fetchAndDisplayProfile(loggedInUser.name);
-    setupEventListeners(loggedInUser.name);
-  } catch (error) {
-    console.error("Initialization failed:", error);
-  }
-}
-
-function setupEventListeners(userName) {
-  document
-    .getElementById("followButton")
-    .addEventListener("click", () => handleFollow(userName));
-  document
-    .getElementById("unfollowButton")
-    .addEventListener("click", () => handleUnfollow(userName));
-
-  const avatarInput = document.getElementById("avatar");
-  const bannerInput = document.getElementById("banner");
-  avatarInput.addEventListener("change", () => validateImage(avatarInput));
-  bannerInput.addEventListener("change", () => validateImage(bannerInput));
-
-  const updateForm = document.getElementById("updateMediaForm");
-  updateForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    updateProfileMedia(event, userName);
-  });
-}
-
-document.addEventListener("DOMContentLoaded", init);
+});
