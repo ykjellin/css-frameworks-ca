@@ -10,24 +10,21 @@ function updatePostInUI(updatedPost) {
   if (modalTitle) {
     modalTitle.textContent = updatedPost.title;
   }
-
   if (modalBody) {
     modalBody.textContent = updatedPost.body;
   }
-
   if (modalImage) {
     modalImage.src = updatedPost.media;
   }
 }
 
-export async function handleUpdatePostClick(event, post) {
+export async function handleUpdatePostClick(event) {
   event.preventDefault();
 
   const postId = document.getElementById("updatePostId").value;
   const title = document.getElementById("updatePostTitle").value;
   const body = document.getElementById("updatePostBody").value;
   const media = document.getElementById("updatePostMedia").value;
-
   const accessToken = getLocal("accessToken");
 
   if (accessToken) {
@@ -45,9 +42,16 @@ export async function handleUpdatePostClick(event, post) {
         const updatedPost = await response.json();
         console.log("Post updated:", updatedPost);
         updatePostInUI(updatedPost);
+
         const updatePostModal = document.getElementById("updatePostModal");
         const modal = bootstrap.Modal.getInstance(updatePostModal);
         modal.hide();
+
+        document.getElementById("updatePostTitle").value = "";
+        document.getElementById("updatePostBody").value = "";
+        document.getElementById("updatePostMedia").value = "";
+
+        openModal(updatedPost); // Open the post details modal with the updated post
       } else {
         const errorData = await response.json();
         console.error("Error updating post:", errorData);

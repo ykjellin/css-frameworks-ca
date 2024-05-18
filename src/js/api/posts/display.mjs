@@ -26,6 +26,11 @@ export function displayPosts(
       openModal(post);
     });
 
+    const updateButton = postElement.querySelector(".update-open-btn");
+    if (updateButton) {
+      updateButton.setAttribute("data-post-id", post.id);
+    }
+
     postImage.src = post.media;
     postTitle.textContent = post.title;
     postBody.textContent = post.body;

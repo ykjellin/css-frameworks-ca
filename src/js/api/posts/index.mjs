@@ -1,7 +1,7 @@
 import { getPosts, getPostById } from "./get.mjs";
 import { displayPosts } from "./display.mjs";
 import { loadMorePosts } from "./load.mjs";
-import { openModal } from "./postModal.mjs";
+import { openModal, openUpdateModal } from "./postModal.mjs";
 import { applyFilters } from "./filter.mjs";
 import { setupCreatePostModal } from "./create.mjs";
 import { handleUpdatePostClick } from "./update.mjs";
@@ -21,8 +21,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchForm = document.getElementById("searchForm");
     const searchInput = document.getElementById("searchInput");
     const postModal = document.getElementById("postModal");
+    const updatePostButton = document.getElementById("updatePostButton");
+    const updatePostForm = document.getElementById("updatePostForm");
+
     postModal.addEventListener("hidden.bs.modal", () => {
-      document.body.classList.remove("modal-open");
+      if (!document.querySelector("#updatePostModal.show")) {
+        document.body.classList.remove("modal-open");
+        document.getElementById("updatePostForm").style.display = "none"; // Ensure form is hidden when modal is closed
+        document.getElementById("postModalBody").style.display = "block";
+        document.getElementById("postModalImage").style.display = "block";
+        updatePostButton.style.display = "inline-block";
+      }
     });
 
     async function fetchPosts() {
@@ -96,15 +105,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function handleViewPostClick(event) {
+      const target = event.target;
+
+      if (target.closest(".read-more-btn")) {
+        const postId = target
+          .closest(".post-card")
+          .getAttribute("data-post-id");
+        if (postId) {
+          try {
+            const post = await getPostById(postId);
+            openModal(post);
+          } catch (error) {
+            console.error("Error fetching post details:", error);
+          }
+        }
+      } else if (target.closest(".update-open-btn")) {
+        const postId = target
+          .closest(".post-card")
+          .getAttribute("data-post-id");
+        if (postId) {
+          try {
+            const post = await getPostById(postId);
+            const postModal = document.getElementById("postModal");
+            const modal = bootstrap.Modal.getInstance(postModal);
+            modal.hide();
+            openUpdateModal(post);
+          } catch (error) {
+            console.error("Error fetching post details:", error);
+          }
+        }
+      }
+    }
+
+    async function handleUpdateButtonClick(event) {
       const postId = event.target.getAttribute("data-post-id");
       if (postId) {
         try {
           const post = await getPostById(postId);
-          openModal(post);
-          const updateButton = document.getElementById("updatePostButton");
-          updateButton.addEventListener("click", (event) =>
-            handleUpdatePostClick(event, post)
-          );
+          openModal(post, true);
         } catch (error) {
           console.error("Error fetching post details:", error);
         }
@@ -120,9 +158,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     searchForm.addEventListener("submit", handleSearch);
     container.addEventListener("click", handleViewPostClick);
+    updatePostForm.addEventListener("submit", handleUpdatePostClick);
 
     await fetchPosts();
-
     setupCreatePostModal();
   })();
 });
