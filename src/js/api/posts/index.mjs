@@ -1,8 +1,10 @@
 import { getPosts, getPostById } from "./get.mjs";
 import { displayPosts } from "./display.mjs";
 import { loadMorePosts } from "./load.mjs";
-import { openPostModal } from "./postModal.mjs";
+import { openModal } from "./postModal.mjs";
 import { applyFilters } from "./filter.mjs";
+import { setupCreatePostModal } from "./create.mjs";
+import { handleUpdatePostClick } from "./update.mjs";
 
 const PAGE_SIZE = 20;
 let currentOffset = 0;
@@ -18,6 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const commentsFilter = document.getElementById("commentsFilter");
     const searchForm = document.getElementById("searchForm");
     const searchInput = document.getElementById("searchInput");
+    const postModal = document.getElementById("postModal");
+    postModal.addEventListener("hidden.bs.modal", () => {
+      document.body.classList.remove("modal-open");
+    });
 
     async function fetchPosts() {
       try {
@@ -37,13 +43,27 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         if (currentSearchQuery) {
-          filteredPosts = filteredPosts.filter(
-            (post) =>
-              post.title
-                .toLowerCase()
-                .includes(currentSearchQuery.toLowerCase()) ||
-              post.body.toLowerCase().includes(currentSearchQuery.toLowerCase())
-          );
+          const searchTerms = currentSearchQuery.toLowerCase().split(" ");
+          filteredPosts = filteredPosts.filter((post) => {
+            const postIdMatch = post.id
+              .toString()
+              .toLowerCase()
+              .includes(currentSearchQuery.toLowerCase());
+            const postTitleMatch = post.title
+              .toLowerCase()
+              .includes(currentSearchQuery.toLowerCase());
+            const postBodyMatch = post.body
+              .toLowerCase()
+              .includes(currentSearchQuery.toLowerCase());
+            const postTermMatch = searchTerms.every(
+              (term) =>
+                post.title.toLowerCase().includes(term) ||
+                post.body.toLowerCase().includes(term)
+            );
+            return (
+              postIdMatch || postTitleMatch || postBodyMatch || postTermMatch
+            );
+          });
         }
 
         displayPosts(
@@ -80,7 +100,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (postId) {
         try {
           const post = await getPostById(postId);
-          openPostModal(post);
+          openModal(post);
+          const updateButton = document.getElementById("updatePostButton");
+          updateButton.addEventListener("click", () =>
+            handleUpdatePostClick(post)
+          );
         } catch (error) {
           console.error("Error fetching post details:", error);
         }
@@ -98,5 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     container.addEventListener("click", handleViewPostClick);
 
     await fetchPosts();
+
+    setupCreatePostModal();
   })();
 });

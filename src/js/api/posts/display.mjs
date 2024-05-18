@@ -1,4 +1,4 @@
-import { openPostModal } from "./postModal.mjs";
+import { openModal } from "./postModal.mjs";
 
 export function displayPosts(
   posts,
@@ -17,11 +17,13 @@ export function displayPosts(
     const postCreated = postCard.querySelector(".text-muted");
     const postCommentsCount = postCard.querySelector(".comments-count");
     const postReactionsCount = postCard.querySelector(".reactions-count");
+    const postItem = postElement.querySelector(".post");
+    postItem.setAttribute("data-post-id", post.id);
 
     const readMoreButton = postCard.querySelector(".read-more-btn");
     readMoreButton.setAttribute("data-post-id", post.id);
     readMoreButton.addEventListener("click", () => {
-      openPostModal(post);
+      openModal(post);
     });
 
     postImage.src = post.media;

@@ -142,7 +142,7 @@
         <!-- Post Card Template -->
         <template id="postTemplate">
           <div class="col-md-4">
-            <div class="card mb-4 post-card">
+            <div class="card mb-4 post-card post">
               <img class="card-img-top" alt="Post Image" />
               <div class="card-body">
                 <h5 class="card-title"></h5>
@@ -195,6 +195,63 @@
             >
               Close
             </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="updatePostButton"
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal"
+      id="updatePostModal"
+      tabindex="-1"
+      aria-labelledby="updatePostModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updatePostModalLabel">Update Post</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="updatePostForm">
+              <div class="mb-3">
+                <label for="updatePostTitle" class="form-label">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="updatePostTitle"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="updatePostBody" class="form-label">Body</label>
+                <textarea
+                  class="form-control"
+                  id="updatePostBody"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="updatePostMedia" class="form-label"
+                  >Media URL</label
+                >
+                <input type="text" class="form-control" id="updatePostMedia" />
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
           </div>
         </div>
       </div>
@@ -208,7 +265,7 @@
       aria-hidden="true"
     >
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content modal-content-custom">
           <div class="modal-header">
             <h5 class="modal-title" id="createPostModalLabel">
               Create New Post
@@ -236,11 +293,13 @@
               </div>
               <div class="mb-3">
                 <label for="postImage" class="form-label"
-                  >Image (optional)</label
+                  >Image URL (optional)</label
                 >
-                <input type="file" class="form-control" id="postImage" />
+                <input type="url" class="form-control" id="postImage" />
               </div>
-              <button type="submit" class="btn btn-primary">Post</button>
+              <button type="submit" class="btn btn-primary create-post-btn">
+                Post
+              </button>
             </form>
           </div>
         </div>
