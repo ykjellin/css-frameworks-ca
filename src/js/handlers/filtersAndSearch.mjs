@@ -1,25 +1,36 @@
-import {
-  fetchAndFilterPosts,
-  currentReactions,
-  currentComments,
-  currentSearchQuery,
-  currentOffset,
-} from "./fetchAndFilterPosts.mjs";
+import { fetchAndFilterPosts, state } from "./fetchAndFilterPosts.mjs";
 
-export function handleFilterChange(container, reactionsFilter, commentsFilter) {
+export function handleFilterChange(
+  container,
+  postTemplate,
+  reactionsFilter,
+  commentsFilter
+) {
   return function () {
-    currentReactions = reactionsFilter ? reactionsFilter.value : "";
-    currentComments = commentsFilter ? commentsFilter.value : "";
-    currentOffset = 0;
+    state.currentReactions = reactionsFilter ? reactionsFilter.value : "";
+    state.currentComments = commentsFilter ? commentsFilter.value : "";
+    state.currentOffset = 0;
     container.innerHTML = "";
-    fetchAndFilterPosts(container, reactionsFilter, commentsFilter);
+    fetchAndFilterPosts(
+      container,
+      postTemplate,
+      reactionsFilter,
+      commentsFilter
+    );
   };
 }
 
-export function handleSearch(event, container, searchInput) {
+export function handleSearch(
+  event,
+  container,
+  postTemplate,
+  searchInput,
+  reactionsFilter,
+  commentsFilter
+) {
   event.preventDefault();
-  currentSearchQuery = searchInput.value.trim();
-  currentOffset = 0;
+  state.currentSearchQuery = searchInput.value.trim();
+  state.currentOffset = 0;
   container.innerHTML = "";
-  fetchAndFilterPosts(container, reactionsFilter, commentsFilter);
+  fetchAndFilterPosts(container, postTemplate, reactionsFilter, commentsFilter);
 }

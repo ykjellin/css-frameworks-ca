@@ -2,6 +2,27 @@ import { getPosts } from "./get.mjs";
 import { displayPosts } from "./display.mjs";
 import { applyFilters } from "./filter.mjs";
 
+function filterAndDisplayPosts(
+  posts,
+  container,
+  postTemplate,
+  currentOffset,
+  PAGE_SIZE,
+  loadMorePosts,
+  currentReactions,
+  currentComments
+) {
+  const filteredPosts = applyFilters(posts, currentReactions, currentComments);
+  displayPosts(
+    filteredPosts,
+    container,
+    postTemplate,
+    currentOffset,
+    PAGE_SIZE,
+    loadMorePosts
+  );
+}
+
 export async function loadMorePosts(
   PAGE_SIZE,
   currentOffset,
@@ -19,18 +40,15 @@ export async function loadMorePosts(
       includeComments,
       includeReactions
     );
-    const filteredPosts = applyFilters(
+    filterAndDisplayPosts(
       posts,
-      currentReactions,
-      currentComments
-    );
-    displayPosts(
-      filteredPosts,
       container,
       postTemplate,
       currentOffset,
       PAGE_SIZE,
-      loadMorePosts
+      loadMorePosts,
+      currentReactions,
+      currentComments
     );
   } catch (error) {
     console.error("Error loading more posts:", error);

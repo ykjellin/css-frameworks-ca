@@ -5,10 +5,12 @@ import { loadMorePosts } from "../api/posts/load.mjs";
 
 const PAGE_SIZE = 20;
 
-export let currentOffset = 0;
-export let currentReactions = "";
-export let currentComments = "";
-export let currentSearchQuery = "";
+export const state = {
+  currentOffset: 0,
+  currentReactions: "",
+  currentComments: "",
+  currentSearchQuery: "",
+};
 
 export async function fetchAndFilterPosts(
   container,
@@ -21,29 +23,36 @@ export async function fetchAndFilterPosts(
     const includeComments = commentsFilter && commentsFilter.value !== "";
     const posts = await getPosts(
       PAGE_SIZE,
-      currentOffset,
+      state.currentOffset,
       includeComments,
       includeReactions
     );
-    let filteredPosts = applyFilters(posts, currentReactions, currentComments);
+    let filteredPosts = applyFilters(
+      posts,
+      state.currentReactions,
+      state.currentComments
+    );
 
-    if (currentSearchQuery) {
-      const searchTerms = currentSearchQuery.toLowerCase().split(" ");
+    console.log("Posts fetched:", posts);
+
+    if (state.currentSearchQuery) {
+      const searchTerms = state.currentSearchQuery.toLowerCase().split(" ");
       filteredPosts = filteredPosts.filter((post) => {
-        const postIdMatch = post.id
-          .toString()
-          .toLowerCase()
-          .includes(currentSearchQuery.toLowerCase());
-        const postTitleMatch = post.title
-          .toLowerCase()
-          .includes(currentSearchQuery.toLowerCase());
-        const postBodyMatch = post.body
-          .toLowerCase()
-          .includes(currentSearchQuery.toLowerCase());
+        const postId = post.id ? post.id.toString().toLowerCase() : "";
+        const postTitle = post.title ? post.title.toLowerCase() : "";
+        const postBody = post.body ? post.body.toLowerCase() : "";
+
+        const postIdMatch = postId.includes(
+          state.currentSearchQuery.toLowerCase()
+        );
+        const postTitleMatch = postTitle.includes(
+          state.currentSearchQuery.toLowerCase()
+        );
+        const postBodyMatch = postBody.includes(
+          state.currentSearchQuery.toLowerCase()
+        );
         const postTermMatch = searchTerms.every(
-          (term) =>
-            post.title.toLowerCase().includes(term) ||
-            post.body.toLowerCase().includes(term)
+          (term) => postTitle.includes(term) || postBody.includes(term)
         );
         return postIdMatch || postTitleMatch || postBodyMatch || postTermMatch;
       });
@@ -53,7 +62,7 @@ export async function fetchAndFilterPosts(
       filteredPosts,
       container,
       postTemplate,
-      currentOffset,
+      state.currentOffset,
       PAGE_SIZE,
       loadMorePosts
     );

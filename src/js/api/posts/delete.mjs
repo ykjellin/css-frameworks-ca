@@ -29,30 +29,37 @@ export async function deletePost(id) {
   }
 }
 
+function confirmDeletion() {
+  return confirm("Are you sure you want to delete this post?");
+}
+
+async function deletePostById(postId) {
+  try {
+    const success = await deletePost(postId);
+    if (success) {
+      const postElement = document.querySelector(
+        `.post-card[data-post-id='${postId}']`
+      );
+      if (postElement) {
+        postElement.remove();
+      }
+    } else {
+      console.error("Failed to delete post with ID:", postId);
+      alert("An error occurred while deleting the post.");
+    }
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    alert("An error occurred while deleting the post.");
+  }
+}
+
 export function handleDeletePostClick(event) {
   const target = event.target;
   const postId = target.getAttribute("data-post-id");
 
   if (postId) {
-    if (confirm("Are you sure you want to delete this post?")) {
-      deletePost(postId)
-        .then((success) => {
-          if (success) {
-            const postElement = document.querySelector(
-              `.post-card[data-post-id='${postId}']`
-            );
-            if (postElement) {
-              postElement.remove();
-            }
-          } else {
-            console.error("Failed to delete post with ID:", postId);
-            alert("An error occurred while deleting the post.");
-          }
-        })
-        .catch((error) => {
-          console.error("Error deleting post:", error);
-          alert("An error occurred while deleting the post.");
-        });
+    if (confirmDeletion()) {
+      deletePostById(postId);
     }
   } else {
     console.error("Post ID not found on delete button.");

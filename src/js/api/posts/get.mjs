@@ -3,12 +3,10 @@ import { authFetch } from "../authFetch.mjs";
 
 export const action = "/posts";
 
-export async function getPosts(
-  limit,
-  offset,
-  includeComments,
-  includeReactions
-) {
+function buildUrl(limit, offset, includeComments, includeReactions) {
+  console.log(
+    `Building URL with limit=${limit}, offset=${offset}, includeComments=${includeComments}, includeReactions=${includeReactions}`
+  );
   let url = `${API_SOCIAL}/posts?limit=${limit}&offset=${offset}`;
   if (includeComments) {
     url += `&_comments=true`;
@@ -16,32 +14,35 @@ export async function getPosts(
   if (includeReactions) {
     url += `&_reactions=true`;
   }
+  return url;
+}
 
+async function fetchData(url) {
   try {
     const response = await authFetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error: ${response.status}`);
     }
-    const posts = await response.json();
-    console.log("Posts fetched:", posts);
-    return posts;
+    return await response.json();
   } catch (error) {
-    console.error("Failed to fetch posts:", error.message);
+    console.error("Failed to fetch data:", error.message);
     throw error;
   }
 }
 
+export async function getPosts(
+  limit,
+  offset,
+  includeComments,
+  includeReactions
+) {
+  const url = buildUrl(limit, offset, includeComments, includeReactions);
+  console.log("Fetching posts from:", url);
+  return fetchData(url);
+}
+
 export async function getPostById(postId) {
-  try {
-    const response = await authFetch(`${API_SOCIAL}/posts/${postId}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
-    const post = await response.json();
-    console.log("Post fetched:", post);
-    return post;
-  } catch (error) {
-    console.error("Failed to fetch post:", error.message);
-    throw error;
-  }
+  const url = `${API_SOCIAL}/posts/${postId}`;
+  console.log("Fetching post by ID from:", url);
+  return fetchData(url);
 }

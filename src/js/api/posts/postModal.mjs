@@ -26,13 +26,8 @@ function observeDisplayChanges() {
   observer.observe(updatePostForm, { attributes: true });
 }
 
-export function openModal(post) {
-  const modalElement = document.getElementById("postModal");
-  const modal = new bootstrap.Modal(modalElement);
-  const updateButton = modalElement.querySelector(".update-open-btn");
-  const deleteButton = modalElement.querySelector(".delete-post-btn");
-
-  function handleModalShown() {
+function handleModalShown(post, updateButton, deleteButton) {
+  return function () {
     document.getElementById("postModalLabel").textContent = post.title;
     document.getElementById("postModalImage").src = post.media;
     document.getElementById("postModalBody").textContent = post.body;
@@ -42,9 +37,11 @@ export function openModal(post) {
 
     deleteButton.setAttribute("data-post-id", post.id);
     deleteButton.addEventListener("click", handleDeletePostClick);
-  }
+  };
+}
 
-  function handleModalHidden() {
+function handleModalHidden(deleteButton) {
+  return function () {
     document.body.classList.remove("modal-open");
     const modalBackdrop = document.querySelector(".modal-backdrop");
     if (modalBackdrop) {
@@ -53,10 +50,23 @@ export function openModal(post) {
 
     deleteButton.removeEventListener("click", handleDeletePostClick);
     location.reload(); // Reload the page when the modal is hidden
-  }
+  };
+}
 
-  modalElement.addEventListener("shown.bs.modal", handleModalShown);
-  modalElement.addEventListener("hidden.bs.modal", handleModalHidden);
+export function openModal(post) {
+  const modalElement = document.getElementById("postModal");
+  const modal = new bootstrap.Modal(modalElement);
+  const updateButton = modalElement.querySelector(".update-open-btn");
+  const deleteButton = modalElement.querySelector(".delete-post-btn");
+
+  modalElement.addEventListener(
+    "shown.bs.modal",
+    handleModalShown(post, updateButton, deleteButton)
+  );
+  modalElement.addEventListener(
+    "hidden.bs.modal",
+    handleModalHidden(deleteButton)
+  );
 
   updateButton.addEventListener("click", () => {
     modal.hide();

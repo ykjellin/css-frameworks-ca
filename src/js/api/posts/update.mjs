@@ -18,6 +18,29 @@ function updatePostInUI(updatedPost) {
   }
 }
 
+async function sendUpdateRequest(postId, title, body, media, accessToken) {
+  try {
+    const response = await fetch(`${API_SOCIAL}/posts/${postId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, body, media }),
+    });
+
+    if (response.ok) {
+      return await response.json();
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.message);
+    }
+  } catch (error) {
+    console.error("Error updating post:", error);
+    throw error;
+  }
+}
+
 export async function handleUpdatePostClick(event) {
   event.preventDefault();
 
@@ -29,37 +52,27 @@ export async function handleUpdatePostClick(event) {
 
   if (accessToken) {
     try {
-      const response = await fetch(`${API_SOCIAL}/posts/${postId}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ title, body, media }),
-      });
+      const updatedPost = await sendUpdateRequest(
+        postId,
+        title,
+        body,
+        media,
+        accessToken
+      );
+      console.log("Post updated:", updatedPost);
+      updatePostInUI(updatedPost);
 
-      if (response.ok) {
-        const updatedPost = await response.json();
-        console.log("Post updated:", updatedPost);
-        updatePostInUI(updatedPost);
+      const updatePostModal = document.getElementById("updatePostModal");
+      const modal = bootstrap.Modal.getInstance(updatePostModal);
+      modal.hide();
 
-        const updatePostModal = document.getElementById("updatePostModal");
-        const modal = bootstrap.Modal.getInstance(updatePostModal);
-        modal.hide();
+      document.getElementById("updatePostTitle").value = "";
+      document.getElementById("updatePostBody").value = "";
+      document.getElementById("updatePostMedia").value = "";
 
-        document.getElementById("updatePostTitle").value = "";
-        document.getElementById("updatePostBody").value = "";
-        document.getElementById("updatePostMedia").value = "";
-
-        openModal(updatedPost); // Open the post details modal with the updated post
-      } else {
-        const errorData = await response.json();
-        console.error("Error updating post:", errorData);
-        alert("An error occurred while updating the post.");
-      }
+      openModal(updatedPost); // Open the post details modal with the updated post
     } catch (error) {
-      console.error("Error updating post:", error);
-      alert("An error occurred while updating the post.");
+      alert("An error occurred while updating the post. Please try again.");
     }
   } else {
     alert("Please log in to update posts.");
