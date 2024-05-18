@@ -31,6 +31,11 @@ export function displayPosts(
       updateButton.setAttribute("data-post-id", post.id);
     }
 
+    const deleteButton = postElement.querySelector(".delete-post-btn");
+    if (deleteButton) {
+      deleteButton.setAttribute("data-post-id", post.id);
+    }
+
     postImage.src = post.media;
     postTitle.textContent = post.title;
     postBody.textContent = post.body;
