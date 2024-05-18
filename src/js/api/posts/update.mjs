@@ -20,7 +20,7 @@ function updatePostInUI(updatedPost) {
   }
 }
 
-export async function handleUpdatePostClick(event) {
+export async function handleUpdatePostClick(event, post) {
   event.preventDefault();
 
   const postId = document.getElementById("updatePostId").value;

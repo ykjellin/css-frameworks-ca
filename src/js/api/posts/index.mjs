@@ -102,8 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const post = await getPostById(postId);
           openModal(post);
           const updateButton = document.getElementById("updatePostButton");
-          updateButton.addEventListener("click", () =>
-            handleUpdatePostClick(post)
+          updateButton.addEventListener("click", (event) =>
+            handleUpdatePostClick(event, post)
           );
         } catch (error) {
           console.error("Error fetching post details:", error);

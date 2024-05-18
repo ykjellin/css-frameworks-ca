@@ -206,56 +206,30 @@
         </div>
       </div>
     </div>
-    <div
-      class="modal"
-      id="updatePostModal"
-      tabindex="-1"
-      aria-labelledby="updatePostModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="updatePostModalLabel">Update Post</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="updatePostForm">
-              <div class="mb-3">
-                <label for="updatePostTitle" class="form-label">Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="updatePostTitle"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="updatePostBody" class="form-label">Body</label>
-                <textarea
-                  class="form-control"
-                  id="updatePostBody"
-                  rows="3"
-                  required
-                ></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="updatePostMedia" class="form-label"
-                  >Media URL</label
-                >
-                <input type="text" class="form-control" id="updatePostMedia" />
-              </div>
-              <button type="submit" class="btn btn-primary">Update</button>
-            </form>
-          </div>
-        </div>
+    <!--Update-->
+    <form id="updatePostForm">
+      <input type="hidden" id="updatePostId" name="postId" value="" />
+
+      <div class="mb-3">
+        <label for="updatePostTitle" class="form-label">Title</label>
+        <input type="text" class="form-control" id="updatePostTitle" required />
       </div>
-    </div>
+      <div class="mb-3">
+        <label for="updatePostBody" class="form-label">Body</label>
+        <textarea
+          class="form-control"
+          id="updatePostBody"
+          rows="3"
+          required
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="updatePostMedia" class="form-label">Media URL</label>
+        <input type="text" class="form-control" id="updatePostMedia" />
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+
     <!-- Create New Post -->
     <div
       class="modal fade"
