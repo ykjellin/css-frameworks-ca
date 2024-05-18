@@ -88,7 +88,8 @@ body {
 
 .read-more-btn,
 .load-more-btn,
-.filter-button {
+.filter-button,
+.create-post-btn {
   background-color: $body-color;
   color: #000000;
   border-color: $body-color;
@@ -96,7 +97,8 @@ body {
 
 .read-more-btn:hover,
 .load-more-btn:hover,
-.filter-button:hover {
+.filter-button:hover,
+.create-post-btn:hover {
   background-color: darken($body-color, 10%);
   border-color: darken($body-color, 10%);
 }
