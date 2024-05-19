@@ -34,5 +34,6 @@ npm install
 - Sass
 - Javascript
 
-  ### Deployed
-  Netlify: https://bumpsocial.netlify.app/
+  ### Resources
+  Netlify: https://exquisite-dodol-9b7e8a.netlify.app
+  Trello Board: https://trello.com/b/kwPRtS45/javascript-2-ca-bump-social
