@@ -35,5 +35,5 @@ npm install
 - Javascript
 
   ### Resources
-  Netlify: https://exquisite-dodol-9b7e8a.netlify.app
+  Netlify: https://snazzy-muffin-513f4c.netlify.app
   Trello Board: https://trello.com/b/kwPRtS45/javascript-2-ca-bump-social
