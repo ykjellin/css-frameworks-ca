@@ -14,7 +14,7 @@ export async function router() {
   handlers.setupLogoutButton();
 
   switch (path) {
-    case "/":
+    case "/index.html/":
       // Home page logic, which is login page
       handlers.setLoginFormListener();
       break;
@@ -32,11 +32,9 @@ export async function router() {
         console.error("Required elements not found in the DOM.");
         return;
       }
-      console.log("Before calling setupEventListeners");
-      console.log("container:", container);
-      console.log("postTemplate:", postTemplate);
+
       handlers.setupEventListeners(container, postTemplate);
-      console.log("After calling setupEventListeners");
+
       const posts = []; // Fetch or load posts
       const PAGE_SIZE = 10;
       let currentOffset = 0;

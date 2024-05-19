@@ -63,8 +63,6 @@ export async function fetchAndFilterPosts(
       });
     }
 
-    console.log("Filtered Posts After Search:", filteredPosts); // Debugging line
-
     // Clear the container before displaying new posts
     container.innerHTML = "";
 
