@@ -19,7 +19,7 @@ const PAGE_SIZE = 20;
  */
 
 export const state = {
-  allPosts: [],
+  allPosts: [], // Store all posts here
   currentOffset: 0,
   currentReactions: "",
   currentComments: "",
@@ -36,7 +36,6 @@ export async function fetchPosts() {
     const includeComments = true;
     const includeReactions = true;
     state.allPosts = await getPosts(includeComments, includeReactions);
-    console.log("Fetched posts:", state.allPosts);
   } catch (error) {
     console.error("Error fetching posts:", error);
   }
@@ -76,8 +75,6 @@ export async function fetchAndFilterPosts(
       throw new Error("The fetched posts are not in an array format.");
     }
 
-    console.log("Fetched posts:", posts);
-
     let filteredPosts = applyFilters(
       state.allPosts,
       state.currentReactions,
@@ -107,8 +104,6 @@ export async function fetchAndFilterPosts(
         return postIdMatch || postTitleMatch || postBodyMatch || postTermMatch;
       });
     }
-
-    console.log("Filtered posts:", filteredPosts);
 
     displayPosts(
       filteredPosts,
