@@ -1,7 +1,7 @@
-import { getPosts } from "../posts/get.mjs";
-import { applyFilters } from "../posts/filter.mjs";
-import { displayPosts } from "../posts/display.mjs";
-import { loadMorePosts } from "../posts/load.mjs";
+import { getPosts } from "../api/posts/get.mjs";
+import { applyFilters } from "../api/posts/filter.mjs";
+import { displayPosts } from "../api/posts/display.mjs";
+import { loadMorePosts } from "../api/posts/load.mjs";
 
 const PAGE_SIZE = 20;
 
