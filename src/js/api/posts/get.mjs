@@ -1,8 +1,6 @@
 import { API_SOCIAL } from "../../constants.mjs";
 import { authFetch } from "../authFetch.mjs";
 
-export const action = "/posts";
-
 /**
  * Builds the URL for fetching posts.
  * @returns {string} The URL for fetching posts.

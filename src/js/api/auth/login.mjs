@@ -1,10 +1,8 @@
 // login.mjs
 import { API_SOCIAL } from "../../constants.mjs";
-import { saveLocal, getLocal, removeLocal } from "../../storage/storage.mjs";
+import { saveLocal } from "../../storage/storage.mjs";
 
-const action = "/auth/login";
-const method = "post";
-const loginURL = `${API_SOCIAL}${action}`;
+const loginURL = `${API_SOCIAL}/auth/login`;
 
 export async function handleLoginSubmit(event) {
   event.preventDefault();
@@ -55,5 +53,3 @@ async function login(credentials) {
     throw error;
   }
 }
-
-export { saveLocal, getLocal, removeLocal };
