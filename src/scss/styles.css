@@ -10853,7 +10853,8 @@ body {
   border-color: #ccb20a;
 }
 
-.modal-content-custom {
+.modal-content-custom,
+.update-modal-el {
   background-color: #585755;
 }
 

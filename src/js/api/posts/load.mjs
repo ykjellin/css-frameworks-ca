@@ -5,7 +5,7 @@ import { applyFilters } from "./filter.mjs";
 /**
  * Filters posts based on reactions and comments, and displays them in the specified container.
  *
- * @param {Array<Object>} posts - The array of post data to filter and display.
+ * @param {Object[]} posts - The array of post data to filter and display.
  * @param {HTMLElement} container - The container element for displaying posts.
  * @param {HTMLTemplateElement} postTemplate - The template element for posts.
  * @param {number} currentOffset - The current offset for pagination.
@@ -63,6 +63,9 @@ export async function loadMorePosts(
       includeComments,
       includeReactions
     );
+    const { length: numPosts } = posts;
+    const [firstPost] = posts;
+
     filterAndDisplayPosts(
       posts,
       container,

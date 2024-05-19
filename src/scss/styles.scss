@@ -103,7 +103,8 @@ body {
   border-color: darken($body-color, 10%);
 }
 
-.modal-content-custom {
+.modal-content-custom,
+.update-modal-el {
   background-color: $secondary;
 }
 

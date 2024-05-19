@@ -10,34 +10,37 @@ import { API_SOCIAL } from "../../constants.mjs";
  * @param {string} updatedPost.body - The body content of the post.
  * @param {string} updatedPost.media - The media URL of the post.
  */
-function updatePostInUI(updatedPost) {
-  const modalTitle = document.getElementById("postModalLabel");
-  const modalBody = document.getElementById("postModalBody");
-  const modalImage = document.getElementById("postModalImage");
+function updatePostInUI({ title, body, media }) {
+  const [modalTitle, modalBody, modalImage] = [
+    document.getElementById("postModalLabel"),
+    document.getElementById("postModalBody"),
+    document.getElementById("postModalImage"),
+  ];
 
   if (modalTitle) {
-    modalTitle.textContent = updatedPost.title;
+    modalTitle.textContent = title;
   }
   if (modalBody) {
-    modalBody.textContent = updatedPost.body;
+    modalBody.textContent = body;
   }
   if (modalImage) {
-    modalImage.src = updatedPost.media;
+    modalImage.src = media;
   }
 }
 
 /**
  * Sends an update request to the server to update a post.
  *
- * @param {string} postId - The ID of the post to update.
- * @param {string} title - The new title of the post.
- * @param {string} body - The new body content of the post.
- * @param {string} media - The new media URL of the post.
+ * @param {Object} postData - The post data to update.
+ * @param {string} postData.postId - The ID of the post to update.
+ * @param {string} postData.title - The new title of the post.
+ * @param {string} postData.body - The new body content of the post.
+ * @param {string} postData.media - The new media URL of the post.
  * @param {string} accessToken - The access token for authorization.
  * @returns {Promise<Object>} A promise that resolves to the updated post data.
  * @throws Will throw an error if the update request fails.
  */
-async function sendUpdateRequest(postId, title, body, media, accessToken) {
+async function sendUpdateRequest({ postId, title, body, media }, accessToken) {
   try {
     const response = await fetch(`${API_SOCIAL}/posts/${postId}`, {
       method: "PUT",
@@ -69,19 +72,18 @@ async function sendUpdateRequest(postId, title, body, media, accessToken) {
 async function handleUpdatePostFormSubmit(event) {
   event.preventDefault();
 
-  const postId = document.getElementById("updatePostId").value;
-  const title = document.getElementById("updatePostTitle").value;
-  const body = document.getElementById("updatePostBody").value;
-  const media = document.getElementById("updatePostMedia").value;
+  const [postId, title, body, media] = [
+    document.getElementById("updatePostId").value,
+    document.getElementById("updatePostTitle").value,
+    document.getElementById("updatePostBody").value,
+    document.getElementById("updatePostMedia").value,
+  ];
   const accessToken = getLocal("accessToken");
 
   if (accessToken) {
     try {
       const updatedPost = await sendUpdateRequest(
-        postId,
-        title,
-        body,
-        media,
+        { postId, title, body, media },
         accessToken
       );
       updatePostInUI(updatedPost);
@@ -112,9 +114,11 @@ async function handleUpdatePostFormSubmit(event) {
  * @param {string} post.media - The media URL of the post.
  * @param {string} post.body - The body content of the post.
  */
-export function openUpdateModal(post) {
-  const updatePostModal = document.getElementById("updatePostModal");
-  const updatePostForm = document.getElementById("updatePostForm");
+export function openUpdateModal({ id, title, body, media }) {
+  const [updatePostModal, updatePostForm] = [
+    document.getElementById("updatePostModal"),
+    document.getElementById("updatePostForm"),
+  ];
 
   if (!updatePostModal || !updatePostForm) {
     console.error("Update post modal or form element not found.");
@@ -122,10 +126,10 @@ export function openUpdateModal(post) {
   }
 
   // Populate the form with post data
-  document.getElementById("updatePostId").value = post.id;
-  document.getElementById("updatePostTitle").value = post.title;
-  document.getElementById("updatePostBody").value = post.body;
-  document.getElementById("updatePostMedia").value = post.media;
+  document.getElementById("updatePostId").value = id;
+  document.getElementById("updatePostTitle").value = title;
+  document.getElementById("updatePostBody").value = body;
+  document.getElementById("updatePostMedia").value = media;
 
   updatePostForm.style.display = "block";
 

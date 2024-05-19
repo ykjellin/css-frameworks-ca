@@ -5,6 +5,19 @@ import { loadMorePosts } from "../api/posts/load.mjs";
 
 const PAGE_SIZE = 20;
 
+/**
+ * @typedef {Object} State
+ * @property {Array} allPosts - Store all posts here
+ * @property {number} currentOffset - The current offset for pagination
+ * @property {string} currentReactions - The current reactions filter
+ * @property {string} currentComments - The current comments filter
+ * @property {string} currentSearchQuery - The current search query
+ */
+
+/**
+ * @type {State}
+ */
+
 export const state = {
   allPosts: [], // Store all posts here
   currentOffset: 0,
@@ -13,6 +26,11 @@ export const state = {
   currentSearchQuery: "",
 };
 
+/**
+ * Fetches posts from the API and updates the state.
+ * @async
+ * @function fetchPosts
+ */
 export async function fetchPosts() {
   try {
     const includeComments = true;
@@ -23,6 +41,15 @@ export async function fetchPosts() {
   }
 }
 
+/**
+ * Fetches, filters, and displays posts based on the current state and filters.
+ * @async
+ * @function fetchAndFilterPosts
+ * @param {HTMLElement} container - The container element to display posts in.
+ * @param {HTMLTemplateElement} postTemplate - The template element for a post.
+ * @param {HTMLSelectElement} reactionsFilter - The select element for reactions filter.
+ * @param {HTMLSelectElement} commentsFilter - The select element for comments filter.
+ */
 export async function fetchAndFilterPosts(
   container,
   postTemplate,
@@ -43,20 +70,24 @@ export async function fetchAndFilterPosts(
       includeComments,
       includeReactions
     );
+
+    if (!Array.isArray(posts)) {
+      throw new Error("The fetched posts are not in an array format.");
+    }
+
     let filteredPosts = applyFilters(
       state.allPosts,
       state.currentReactions,
       state.currentComments
     );
 
-    console.log("Posts fetched:", posts);
-
     if (state.currentSearchQuery) {
       const searchTerms = state.currentSearchQuery.toLowerCase().split(" ");
       filteredPosts = filteredPosts.filter((post) => {
-        const postId = post.id ? post.id.toString().toLowerCase() : "";
-        const postTitle = post.title ? post.title.toLowerCase() : "";
-        const postBody = post.body ? post.body.toLowerCase() : "";
+        const { id = "", title = "", body = "" } = post;
+        const postId = id.toString().toLowerCase();
+        const postTitle = title.toLowerCase();
+        const postBody = body.toLowerCase();
 
         const postIdMatch = postId.includes(
           state.currentSearchQuery.toLowerCase()

@@ -21,6 +21,15 @@ function createPostElement(post, postTemplate) {
     throw new Error("Post template is not defined or is invalid.");
   }
 
+  const {
+    id,
+    media,
+    title,
+    body,
+    created,
+    _count: { comments, reactions },
+  } = post;
+
   const postElement = postTemplate.content.cloneNode(true);
   const postCard = postElement.querySelector(".card");
   const postImage = postCard.querySelector(".card-img-top");
@@ -30,32 +39,34 @@ function createPostElement(post, postTemplate) {
   const postCommentsCount = postCard.querySelector(".comments-count");
   const postReactionsCount = postCard.querySelector(".reactions-count");
   const postItem = postElement.querySelector(".post");
-  postItem.setAttribute("data-post-id", post.id);
+  postItem.setAttribute("data-post-id", id);
 
   const readMoreButton = postCard.querySelector(".read-more-btn");
-  readMoreButton.setAttribute("data-post-id", post.id);
+  readMoreButton.setAttribute("data-post-id", id);
   readMoreButton.addEventListener("click", () => {
     openModal(post);
   });
 
   const updateButton = postElement.querySelector(".update-open-btn");
   if (updateButton) {
-    updateButton.setAttribute("data-post-id", post.id);
+    updateButton.setAttribute("data-post-id", id);
   }
 
   const deleteButton = postElement.querySelector(".delete-post-btn");
   if (deleteButton) {
-    deleteButton.setAttribute("data-post-id", post.id);
+    deleteButton.setAttribute("data-post-id", id);
   }
 
-  postImage.src = post.media;
-  postTitle.textContent = post.title;
-  postBody.textContent = post.body;
+  const defaultImageURL =
+    "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg";
+  postImage.src = media || defaultImageURL;
+  postTitle.textContent = title;
+  postBody.textContent = body;
   postCreated.textContent = `Created on: ${new Date(
-    post.created
+    created
   ).toLocaleDateString()}`;
-  postCommentsCount.textContent = `Comments: ${post._count.comments}`;
-  postReactionsCount.textContent = `Reactions: ${post._count.reactions}`;
+  postCommentsCount.textContent = `Comments: ${comments}`;
+  postReactionsCount.textContent = `Reactions: ${reactions}`;
 
   return postElement;
 }
@@ -87,47 +98,61 @@ function createLoadMoreButton(
 }
 
 /**
- * Displays posts in the specified container and adds a "Load More" button if necessary.
- *
- * @param {Array<Object>} posts - The array of post data to display.
- * @param {HTMLElement} container - The container element for displaying posts.
- * @param {HTMLTemplateElement} postTemplate - The template element for posts.
- * @param {number} currentOffset - The current offset for pagination.
- * @param {number} PAGE_SIZE - The number of posts to load per page.
- * @param {Function} loadMorePosts - The function to call to load more posts.
+ * Displays a list of posts in the specified container.
+ * @function displayPosts
+ * @param {Array} posts - The list of posts to display.
+ * @param {HTMLElement} container - The container element to display posts in.
+ * @param {HTMLTemplateElement} postTemplate - The template element for a post.
+ * @param {number} offset - The offset to start displaying posts from.
+ * @param {number} limit - The number of posts to display.
+ * @param {Function} loadMoreCallback - The callback function to load more posts.
  */
 export function displayPosts(
   posts,
   container,
   postTemplate,
-  currentOffset,
-  PAGE_SIZE,
-  loadMorePosts
+  offset,
+  limit,
+  loadMoreCallback
 ) {
-  if (!postTemplate || !postTemplate.content) {
-    console.error("Post template is not defined or is invalid.");
+  if (!Array.isArray(posts)) {
+    console.error("Posts is not an array.");
     return;
   }
 
-  posts.forEach((post) => {
-    const postElement = createPostElement(post, postTemplate);
-    container.appendChild(postElement);
+  posts.slice(offset, offset + limit).forEach((post) => {
+    const { id, title, body, media, comments, reactions } = post;
+
+    const clone = document.importNode(postTemplate.content, true);
+    const postElement = clone.querySelector(".post-card");
+
+    postElement.querySelector(".card-title").textContent = title;
+    postElement.querySelector(".card-text").textContent = body;
+    postElement.querySelector(".card-img-top").src =
+      media ||
+      "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg"; // Use default image if media is empty
+    postElement.querySelector(".comments-count").textContent = `Comments: ${
+      comments ? comments.length : 0
+    }`;
+    postElement.querySelector(".reactions-count").textContent = `Reactions: ${
+      reactions ? reactions.length : 0
+    }`;
+
+    postElement
+      .querySelector(".read-more-btn")
+      .addEventListener("click", () => openModal(post));
+
+    container.appendChild(clone);
   });
-  currentOffset += posts.length;
 
-  const previousLoadMoreButton = container.querySelector(".load-more-btn");
-  if (previousLoadMoreButton) {
-    previousLoadMoreButton.remove();
-  }
-
-  if (posts.length === PAGE_SIZE) {
-    const loadMoreButton = createLoadMoreButton(
-      loadMorePosts,
-      PAGE_SIZE,
-      currentOffset,
-      container,
-      postTemplate
-    );
+  if (offset + limit < posts.length) {
+    const loadMoreButton = document.createElement("button");
+    loadMoreButton.textContent = "Load More";
+    loadMoreButton.className = "btn btn-primary load-more-btn";
+    loadMoreButton.addEventListener("click", () => {
+      loadMoreCallback(container, postTemplate, offset + limit, limit);
+      loadMoreButton.remove();
+    });
     container.appendChild(loadMoreButton);
   }
 }
