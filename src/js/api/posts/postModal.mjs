@@ -137,6 +137,7 @@ export function openModal({ title, media, body, id }) {
   modal.show();
 }
 
+
 /**
  * Opens the modal to update a post.
  *
