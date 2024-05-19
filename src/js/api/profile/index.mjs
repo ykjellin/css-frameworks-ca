@@ -1,60 +1,24 @@
-import { fetchAndFilterPosts } from "../../handlers/fetchAndFilterPosts.mjs";
-import { setupEventListeners } from "../../handlers/setupEventListeners.mjs";
-import { setupCreatePostModal } from "../posts/create.mjs";
+import { getLocal } from "../../storage/storage.mjs";
+import { fetchUserPosts } from "./fetchPosts.mjs";
+import { displayPosts } from "./displayPosts.mjs";
 
-/**
- * Initializes event listeners and fetches posts when the DOM content is fully loaded.
- */
-document.addEventListener("DOMContentLoaded", () => {
-  (async () => {
-    const container = document.getElementById("postsContainer");
-    const postTemplate = document.getElementById("postTemplate");
+document.addEventListener("DOMContentLoaded", async function () {
+  const userData = getLocal("userData"); // Fetch user data from local storage
+  if (userData) {
+    document.getElementById("username").textContent = userData.name;
+    document.getElementById("email").textContent = userData.email;
+    document.getElementById("profileImage").src =
+      userData.avatar ||
+      "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg"; // Fallback to default image if not set
 
-    if (!postTemplate) {
-      console.error("Post template not found in the DOM.");
-      return;
+    try {
+      const posts = await fetchUserPosts(); // Fetch posts after confirming user data is available
+      displayPosts(posts); // Display posts if available
+    } catch (error) {
+      console.error("Failed to fetch posts:", error);
     }
-
-    const reactionsFilter = document.getElementById("reactionsFilter");
-    const commentsFilter = document.getElementById("commentsFilter");
-    const searchForm = document.getElementById("searchForm");
-    const searchInput = document.getElementById("searchInput");
-    const updatePostForm = document.getElementById("updatePostForm");
-
-    setupEventListeners(
-      container,
-      postTemplate,
-      reactionsFilter,
-      commentsFilter,
-      searchForm,
-      searchInput,
-      updatePostForm
-    );
-    await fetchAndFilterPosts(
-      container,
-      postTemplate,
-      reactionsFilter,
-      commentsFilter
-    );
-    setupCreatePostModal();
-  })();
-
-  const closeButton = document.querySelector(".button-close");
-  if (closeButton) {
-    closeButton.addEventListener("click", () => {
-      location.reload();
-    });
-  }
-});
-
-/**
- * Adjusts footer opacity based on scroll position.
- */
-window.addEventListener("scroll", function () {
-  const footer = document.querySelector("footer");
-  if (window.scrollY > 0) {
-    footer.style.opacity = 1;
   } else {
-    footer.style.opacity = 0;
+    // Redirect to login if userData is not available
+    window.location.href = "/login.html";
   }
 });

@@ -5,6 +5,8 @@ $primary: #30302f;
 $secondary: #585755;
 $danger: #f4d615;
 $custom-text-color: #000000;
+$max-post-image-height: 500px;
+$max-post-image-width: 100%;
 
 body {
   background-color: $primary;
@@ -106,6 +108,15 @@ body {
 .modal-content-custom,
 .update-modal-el {
   background-color: $secondary;
+}
+
+#postImage {
+  max-width: $max-post-image-width;
+  max-height: $max-post-image-height;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 footer {
