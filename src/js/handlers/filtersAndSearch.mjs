@@ -18,7 +18,6 @@ export function handleFilterChange(
     state.currentReactions = reactionsFilter ? reactionsFilter.value : "";
     state.currentComments = commentsFilter ? commentsFilter.value : "";
     state.currentOffset = 0;
-    container.innerHTML = "";
     fetchAndFilterPosts(
       container,
       postTemplate,
@@ -33,10 +32,29 @@ export function handleFilterChange(
  * @param {Event} event - The submit event object.
  * @param {HTMLInputElement} searchInput - The input element for the search query.
  */
-export function handleSearch(event, searchInput) {
+export function handleSearch(
+  event,
+  searchInput,
+  container,
+  postTemplate,
+  reactionsFilter,
+  commentsFilter
+) {
   event.preventDefault();
-  const searchQuery = searchInput.value.trim();
+  console.log("Search button clicked"); // Debugging line
+  if (searchInput) {
+    const searchQuery = searchInput.value.trim();
+    console.log("Search Query Entered:", searchQuery); // Debugging line
+    state.currentSearchQuery = searchQuery;
 
-  // Perform the search logic based on the searchQuery
-  // You can filter the posts based on the search query and update the displayed posts
+    // Trigger the filter change event to apply the search filter
+    fetchAndFilterPosts(
+      container,
+      postTemplate,
+      reactionsFilter,
+      commentsFilter
+    );
+  } else {
+    console.error("Search input is not defined.");
+  }
 }

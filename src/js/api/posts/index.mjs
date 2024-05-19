@@ -1,4 +1,7 @@
-import { fetchAndFilterPosts } from "../../handlers/fetchAndFilterPosts.mjs";
+import {
+  fetchPosts,
+  fetchAndFilterPosts,
+} from "../../handlers/fetchAndFilterPosts.mjs";
 import { setupEventListeners } from "../../handlers/setupEventListeners.mjs";
 import { setupCreatePostModal } from "../posts/create.mjs";
 import { router } from "../../router.mjs";
@@ -25,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const reactionsFilter = document.getElementById("reactionsFilter");
     const commentsFilter = document.getElementById("commentsFilter");
-    const searchForm = document.getElementById("searchForm");
+    const searchButton = document.getElementById("searchButton");
     const searchInput = document.getElementById("searchInput");
     const updatePostForm = document.getElementById("updatePostForm");
 
@@ -34,12 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
       postTemplate,
       reactionsFilter,
       commentsFilter,
-      searchForm,
+      searchButton,
       searchInput,
       updatePostForm
     );
 
-    await fetchAndFilterPosts(
+    await fetchPosts();
+    fetchAndFilterPosts(
       container,
       postTemplate,
       reactionsFilter,

@@ -86,22 +86,33 @@ function handleModalHidden(deleteButton) {
 export function openModal(post) {
   const modalElement = document.getElementById("postModal");
   const modal = new bootstrap.Modal(modalElement);
+
   const updateButton = modalElement.querySelector(".update-open-btn");
   const deleteButton = modalElement.querySelector(".delete-post-btn");
 
-  modalElement.addEventListener(
-    "shown.bs.modal",
-    handleModalShown(post, updateButton, deleteButton)
-  );
-  modalElement.addEventListener(
-    "hidden.bs.modal",
-    handleModalHidden(deleteButton)
-  );
+  modalElement.addEventListener("shown.bs.modal", () => {
+    document.getElementById("postModalLabel").textContent = post.title;
+    document.getElementById("postModalImage").src = post.media;
+    document.getElementById("postModalBody").textContent = post.body;
 
-  updateButton.addEventListener("click", () => {
-    modal.hide();
-    openUpdateModal(post);
+    updateButton.style.display = "inline-block";
+    updateButton.setAttribute("data-post-id", post.id);
+
+    deleteButton.setAttribute("data-post-id", post.id);
+    deleteButton.addEventListener("click", handleDeletePostClick);
   });
+
+  modalElement.addEventListener("hidden.bs.modal", () => {
+    document.body.classList.remove("modal-open");
+    const modalBackdrop = document.querySelector(".modal-backdrop");
+    if (modalBackdrop) {
+      modalBackdrop.parentNode.removeChild(modalBackdrop);
+    }
+
+    deleteButton.removeEventListener("click", handleDeletePostClick);
+  });
+
+  handleUpdatePostClick(post);
 
   modal.show();
 }

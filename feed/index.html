@@ -50,25 +50,8 @@
                 <a class="nav-link text-warning" href="/profile">Profile</a>
               </li>
               <li class="nav-item dropdown navigation-text navigation-sort">
-                <a
-                  class="nav-link dropdown-toggle text-warning"
-                  href="#"
-                  id="navbarDropdownMenuLink"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Sort
-                </a>
-                <ul
-                  class="dropdown-menu"
-                  aria-labelledby="navbarDropdownMenuLink"
-                >
-                  <li><a class="dropdown-item" href="#">Newest First</a></li>
-                  <li><a class="dropdown-item" href="#">Oldest First</a></li>
-                </ul>
-              </li>
-            </ul>
+
+  
             <button
               class="btn btn-warning"
               data-bs-toggle="modal"
@@ -76,18 +59,8 @@
             >
               Create New Post
             </button>
-            <form class="d-flex ms-2" id="searchForm">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search posts"
-                aria-label="Search"
-                id="searchInput"
-              />
-              <button class="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
+            
+
           </div>
         </div>
       </nav>
@@ -128,6 +101,11 @@
             <option value="5">5+</option>
             <option value="10">10+</option>
           </select>
+        </div>
+        <div class="mb-3">
+          <label for="searchInput" class="form-label">Search Posts:</label>
+          <input type="text" class="form-control" id="searchInput" />
+          <button class="btn btn-primary mt-2" id="searchButton">Search</button>
         </div>
       </div>
     </div>

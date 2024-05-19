@@ -6,8 +6,8 @@ import { handleUpdatePostClick } from "../api/posts/update.mjs";
  * Set up event listeners for various elements on the page.
  * @param {HTMLElement} container - The container element for posts.
  * @param {HTMLElement} postTemplate - The template element for posts.
- * @param {HTMLElement} [reactionsFilter] - The filter element for reactions.
- * @param {HTMLElement} [commentsFilter] - The filter element for comments.
+ * @param {HTMLSelectElement} [reactionsFilter] - The filter element for reactions.
+ * @param {HTMLSelectElement} [commentsFilter] - The filter element for comments.
  * @param {HTMLElement} searchForm - The form element for search.
  * @param {HTMLInputElement} searchInput - The input element for search.
  * @param {HTMLElement} [updatePostForm] - The form element for updating posts.
@@ -17,36 +17,45 @@ export function setupEventListeners(
   postTemplate,
   reactionsFilter,
   commentsFilter,
-  searchForm,
+  searchButton,
   searchInput,
   updatePostForm
 ) {
   if (reactionsFilter) {
-    reactionsFilter.addEventListener("change", () => {
+    reactionsFilter.addEventListener(
+      "change",
       handleFilterChange(
         container,
         postTemplate,
         reactionsFilter,
         commentsFilter
-      );
-    });
+      )
+    );
   }
 
   if (commentsFilter) {
-    commentsFilter.addEventListener("change", () => {
+    commentsFilter.addEventListener(
+      "change",
       handleFilterChange(
         container,
         postTemplate,
         reactionsFilter,
         commentsFilter
-      );
-    });
+      )
+    );
   }
 
-  if (searchForm) {
-    searchForm.addEventListener("submit", (event) => {
-      handleSearch(event, searchInput);
-    });
+  if (searchButton && searchInput) {
+    searchButton.addEventListener("click", (event) =>
+      handleSearch(
+        event,
+        searchInput,
+        container,
+        postTemplate,
+        reactionsFilter,
+        commentsFilter
+      )
+    );
   }
 
   if (container) {

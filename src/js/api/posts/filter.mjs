@@ -11,13 +11,13 @@ export function applyFilters(posts, reactions, comments) {
 
   if (reactions) {
     filteredPosts = filteredPosts.filter(
-      (post) => post._count.reactions >= parseInt(reactions)
+      (post) => post._count.reactions >= parseInt(reactions, 10)
     );
   }
 
   if (comments) {
     filteredPosts = filteredPosts.filter(
-      (post) => post._count.comments >= parseInt(comments)
+      (post) => post._count.comments >= parseInt(comments, 10)
     );
   }
 

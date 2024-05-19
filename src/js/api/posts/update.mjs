@@ -1,4 +1,4 @@
-import { openModal } from "./postModal.mjs";
+import { openModal as openPostModal } from "./postModal.mjs";
 import { getLocal } from "../../storage/storage.mjs";
 import { API_SOCIAL } from "../../constants.mjs";
 
@@ -61,12 +61,12 @@ async function sendUpdateRequest(postId, title, body, media, accessToken) {
 }
 
 /**
- * Handles the update post button click event.
+ * Handles the update post form submission inside the update modal.
  *
- * @param {Event} event - The click event object.
+ * @param {Event} event - The form submission event.
  * @returns {Promise<void>}
  */
-export async function handleUpdatePostClick(event) {
+async function handleUpdatePostFormSubmit(event) {
   event.preventDefault();
 
   const postId = document.getElementById("updatePostId").value;
@@ -94,7 +94,7 @@ export async function handleUpdatePostClick(event) {
       document.getElementById("updatePostBody").value = "";
       document.getElementById("updatePostMedia").value = "";
 
-      openModal(updatedPost); // Open the post details modal with the updated post
+      openPostModal(updatedPost); // Open the post details modal with the updated post
     } catch (error) {
       alert("An error occurred while updating the post. Please try again.");
     }
@@ -102,3 +102,58 @@ export async function handleUpdatePostClick(event) {
     alert("Please log in to update posts.");
   }
 }
+
+/**
+ * Opens the modal to update a post.
+ *
+ * @param {Object} post - The post data.
+ * @param {string} post.id - The ID of the post.
+ * @param {string} post.title - The title of the post.
+ * @param {string} post.media - The media URL of the post.
+ * @param {string} post.body - The body content of the post.
+ */
+export function openUpdateModal(post) {
+  const updatePostModal = document.getElementById("updatePostModal");
+  const updatePostForm = document.getElementById("updatePostForm");
+
+  if (!updatePostModal || !updatePostForm) {
+    console.error("Update post modal or form element not found.");
+    return;
+  }
+
+  // Populate the form with post data
+  document.getElementById("updatePostId").value = post.id;
+  document.getElementById("updatePostTitle").value = post.title;
+  document.getElementById("updatePostBody").value = post.body;
+  document.getElementById("updatePostMedia").value = post.media;
+
+  updatePostForm.style.display = "block";
+
+  // Initialize the Bootstrap modal
+  const modal = new bootstrap.Modal(updatePostModal);
+
+  // Show the modal
+  modal.show();
+}
+
+/**
+ * Handles the click event for the update button in the post modal.
+ *
+ * @param {Object} post - The post data.
+ */
+export function handleUpdatePostClick(post) {
+  const updateButton = document.querySelector(".update-open-btn");
+
+  updateButton.addEventListener("click", () => {
+    const postModal = bootstrap.Modal.getInstance(
+      document.getElementById("postModal")
+    );
+    postModal.hide(); // Hide the post modal
+    openUpdateModal(post); // Open the update modal
+  });
+}
+
+// Attach the form submission event listener for the update post form
+document
+  .getElementById("updatePostForm")
+  .addEventListener("submit", handleUpdatePostFormSubmit);
