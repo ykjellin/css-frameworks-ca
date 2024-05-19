@@ -48,7 +48,10 @@ function createPostElement(post, postTemplate) {
     deleteButton.setAttribute("data-post-id", post.id);
   }
 
-  postImage.src = post.media;
+  const defaultImageURL =
+    "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg";
+  postImage.src = post.media || defaultImageURL;
+
   postTitle.textContent = post.title;
   postBody.textContent = post.body;
   postCreated.textContent = `Created on: ${new Date(

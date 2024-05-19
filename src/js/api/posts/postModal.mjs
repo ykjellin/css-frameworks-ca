@@ -92,7 +92,12 @@ export function openModal(post) {
 
   modalElement.addEventListener("shown.bs.modal", () => {
     document.getElementById("postModalLabel").textContent = post.title;
-    document.getElementById("postModalImage").src = post.media;
+
+    const defaultImageURL =
+      "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg";
+    document.getElementById("postModalImage").src =
+      post.media || defaultImageURL;
+
     document.getElementById("postModalBody").textContent = post.body;
 
     updateButton.style.display = "inline-block";
