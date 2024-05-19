@@ -4,6 +4,7 @@ import { API_SOCIAL } from "../../constants.mjs";
 /**
  * Unfollows a user.
  * @param {string} name - The username of the user to unfollow.
+ * @returns {Promise}
  */
 export async function handleUnfollow(name) {
   const url = `${API_SOCIAL}/profiles/${name}/unfollow`;

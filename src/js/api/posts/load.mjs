@@ -2,6 +2,18 @@ import { getPosts } from "./get.mjs";
 import { displayPosts } from "./display.mjs";
 import { applyFilters } from "./filter.mjs";
 
+/**
+ * Filters posts based on reactions and comments, and displays them in the specified container.
+ *
+ * @param {Array<Object>} posts - The array of post data to filter and display.
+ * @param {HTMLElement} container - The container element for displaying posts.
+ * @param {HTMLTemplateElement} postTemplate - The template element for posts.
+ * @param {number} currentOffset - The current offset for pagination.
+ * @param {number} PAGE_SIZE - The number of posts to load per page.
+ * @param {Function} loadMorePosts - The function to call to load more posts.
+ * @param {string} currentReactions - The current filter value for reactions.
+ * @param {string} currentComments - The current filter value for comments.
+ */
 function filterAndDisplayPosts(
   posts,
   container,
@@ -23,6 +35,17 @@ function filterAndDisplayPosts(
   );
 }
 
+/**
+ * Loads more posts, applies filters, and displays them in the specified container.
+ *
+ * @param {number} PAGE_SIZE - The number of posts to load per page.
+ * @param {number} currentOffset - The current offset for pagination.
+ * @param {HTMLElement} container - The container element for displaying posts.
+ * @param {HTMLTemplateElement} postTemplate - The template element for posts.
+ * @param {string} currentReactions - The current filter value for reactions.
+ * @param {string} currentComments - The current filter value for comments.
+ * @returns {Promise<void>} A promise that resolves when the posts are loaded and displayed.
+ */
 export async function loadMorePosts(
   PAGE_SIZE,
   currentOffset,

@@ -5,6 +5,12 @@ const action = "/auth/login";
 const method = "post";
 const loginURL = `${API_SOCIAL}${action}`;
 
+/**
+ * Handles the form submission for user login.
+ *
+ * @param {Event} event - The form submission event.
+ * @returns {Promise<void>}
+ */
 export async function handleLoginSubmit(event) {
   event.preventDefault();
 
@@ -14,8 +20,8 @@ export async function handleLoginSubmit(event) {
 
   try {
     const loginResponse = await login(credentials);
-    console.log("Login successful", loginResponse);
     saveLocal("accessToken", loginResponse.accessToken);
+    sessionStorage.setItem("authToken", loginResponse.accessToken); // Save in sessionStorage
     saveLocal("name", loginResponse.name);
     window.location.href = "/profile/";
   } catch (error) {
@@ -27,6 +33,15 @@ export async function handleLoginSubmit(event) {
   }
 }
 
+/**
+ * Sends a login request to the server with the provided credentials.
+ *
+ * @param {Object} credentials - The login credentials.
+ * @param {string} credentials.email - The user's email.
+ * @param {string} credentials.password - The user's password.
+ * @returns {Promise<Object>} A promise that resolves to the login response data.
+ * @throws Will throw an error if the login request fails.
+ */
 async function login(credentials) {
   const errorMessage = document.querySelector(".errorMessage");
 
@@ -40,12 +55,8 @@ async function login(credentials) {
       body: body,
     });
 
-    console.log("Credentials being sent:", credentials);
-    console.log("Body being sent:", body);
-
     if (!response.ok) {
       const errorData = await response.json();
-      console.error("Server response error data:", errorData);
       throw new Error(errorData.message || "Login failed");
     }
 

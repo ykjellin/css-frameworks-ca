@@ -2,10 +2,11 @@ import { authFetch } from "../authFetch.mjs";
 import { API_SOCIAL } from "../../constants.mjs";
 
 /**
- * Function to handle form submission for updating profile media.
+ * Handle form submission for updating profile media.
  *
  * @param {Event} event - The event object from the form submission.
  * @param {string} name - The name of the profile to update.
+ * @returns {Promise<void>}
  */
 export async function updateProfileMedia(event, name) {
   event.preventDefault();
@@ -44,7 +45,7 @@ export async function updateProfileMedia(event, name) {
 }
 
 /**
- * Updates the profile image element with the new avatar URL.
+ * Update the profile image element with the new avatar URL.
  *
  * @param {string} avatarUrl - The URL of the updated avatar image.
  */

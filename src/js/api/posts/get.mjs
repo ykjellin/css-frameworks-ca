@@ -3,20 +3,20 @@ import { authFetch } from "../authFetch.mjs";
 
 export const action = "/posts";
 
-function buildUrl(limit, offset, includeComments, includeReactions) {
-  console.log(
-    `Building URL with limit=${limit}, offset=${offset}, includeComments=${includeComments}, includeReactions=${includeReactions}`
-  );
-  let url = `${API_SOCIAL}/posts?limit=${limit}&offset=${offset}`;
-  if (includeComments) {
-    url += `&_comments=true`;
-  }
-  if (includeReactions) {
-    url += `&_reactions=true`;
-  }
-  return url;
+/**
+ * Builds the URL for fetching posts.
+ * @returns {string} The URL for fetching posts.
+ */
+function buildUrl() {
+  return `${API_SOCIAL}/posts`;
 }
 
+/**
+ * Fetches data from the given URL using an authenticated fetch request.
+ * @param {string} url - The URL to fetch data from.
+ * @returns {Promise<Object>} A promise that resolves to the fetched data.
+ * @throws Will throw an error if the fetch operation fails.
+ */
 async function fetchData(url) {
   try {
     const response = await authFetch(url);
@@ -30,19 +30,23 @@ async function fetchData(url) {
   }
 }
 
-export async function getPosts(
-  limit,
-  offset,
-  includeComments,
-  includeReactions
-) {
-  const url = buildUrl(limit, offset, includeComments, includeReactions);
-  console.log("Fetching posts from:", url);
+/**
+ * Fetches all posts.
+ * @returns {Promise<Array<Object>>} A promise that resolves to an array of posts.
+ * @throws Will throw an error if the fetch operation fails.
+ */
+export async function getPosts() {
+  const url = buildUrl();
   return fetchData(url);
 }
 
+/**
+ * Fetches a post by its ID.
+ * @param {string} postId - The ID of the post to fetch.
+ * @returns {Promise<Object>} A promise that resolves to the fetched post.
+ * @throws Will throw an error if the fetch operation fails.
+ */
 export async function getPostById(postId) {
   const url = `${API_SOCIAL}/posts/${postId}`;
-  console.log("Fetching post by ID from:", url);
   return fetchData(url);
 }

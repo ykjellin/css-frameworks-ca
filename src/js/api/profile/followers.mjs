@@ -1,3 +1,10 @@
+/**
+ * Displays a list of users that are following the current user.
+ *
+ * @param {Array<Object>} followers - An array of user objects that are following the current user.
+ * @param {string} followers[].avatar - The avatar URL of the follower.
+ * @param {string} followers[].name - The name of the follower.
+ */
 export function displayFollowers(followers) {
   const followersContainer = document.getElementById("followersContainer");
   followersContainer.innerHTML = "";

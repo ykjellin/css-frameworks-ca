@@ -1,5 +1,14 @@
 import { openModal } from "../posts/postModal.mjs";
 
+/**
+ * Creates a post element from a template and fills it with post data.
+ * @param {Object} post - The post data.
+ * @param {string} post.id - The ID of the post.
+ * @param {string} post.media - The media URL of the post.
+ * @param {string} post.title - The title of the post.
+ * @param {string} post.body - The body content of the post.
+ * @returns {DocumentFragment} The created post element.
+ */
 function createPostElement(post) {
   const postTemplate = document.getElementById("postTemplate");
   if (!postTemplate || !postTemplate.content) {
@@ -26,6 +35,16 @@ function createPostElement(post) {
   return postElement;
 }
 
+/**
+ * Creates a "Load More" button for loading more profile posts.
+ * @param {Function} loadMoreProfilePosts - The function to call to load more posts.
+ * @param {number} PAGE_SIZE - The number of posts to load per page.
+ * @param {number} currentOffset - The current offset for pagination.
+ * @param {HTMLElement} container - The container element for posts.
+ * @param {HTMLElement} postTemplate - The template element for posts.
+ * @param {string} userName - The username of the profile.
+ * @returns {HTMLButtonElement} The created "Load More" button.
+ */
 function createLoadMoreButton(
   loadMoreProfilePosts,
   PAGE_SIZE,
@@ -49,6 +68,16 @@ function createLoadMoreButton(
   return loadMoreButton;
 }
 
+/**
+ * Displays profile posts in the specified container and adds a "Load More" button if necessary.
+ * @param {Array<Object>} posts - The array of post data to display.
+ * @param {HTMLElement} container - The container element for displaying posts.
+ * @param {HTMLElement} postTemplate - The template element for posts.
+ * @param {number} currentOffset - The current offset for pagination.
+ * @param {number} PAGE_SIZE - The number of posts to load per page.
+ * @param {Function} loadMoreProfilePosts - The function to call to load more posts.
+ * @param {string} userName - The username of the profile.
+ */
 export function displayProfilePosts(
   posts,
   container,
@@ -58,14 +87,10 @@ export function displayProfilePosts(
   loadMoreProfilePosts,
   userName
 ) {
-  console.log("Posts:", posts); // Debugging line
-  console.log("Container:", container); // Debugging line
-
   container.innerHTML = "";
 
   posts.forEach((post) => {
     const postElement = createPostElement(post);
-    console.log("Post Element:", postElement); // Debugging line
     container.appendChild(postElement);
   });
 

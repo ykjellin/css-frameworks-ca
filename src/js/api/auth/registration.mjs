@@ -5,6 +5,17 @@ const action = "/auth/register";
 const method = "post";
 const registrationURL = `${API_SOCIAL}${action}`;
 
+/**
+ * Registers a new user profile.
+ *
+ * @param {Object} profile - The user profile data.
+ * @param {string} profile.name - The username.
+ * @param {string} profile.email - The email address.
+ * @param {string} profile.password - The password.
+ * @param {string} profile.confirmPassword - The confirmation of the password.
+ * @returns {Promise<Object>} A promise that resolves to the registration response data.
+ * @throws Will throw an error if the registration fails.
+ */
 export async function register(profile) {
   const errorMessage = document.querySelector(".errorMessage");
 
@@ -33,6 +44,12 @@ export async function register(profile) {
   }
 }
 
+/**
+ * Handles the form submission for user registration.
+ *
+ * @param {Event} event - The form submission event.
+ * @returns {Promise<void>}
+ */
 export async function handleFormSubmit(event) {
   event.preventDefault();
 

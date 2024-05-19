@@ -1,11 +1,10 @@
 /**
- * Validates the dimensions of an image file uploaded through an input element.
- * Images must not exceed the specified max width and height.
+ * Validates the dimensions of an uploaded image file.
  *
- * @param {HTMLInputElement} input The input element containing the file.
- * @param {number} maxWidth The maximum allowed width.
- * @param {number} maxHeight The maximum allowed height.
- * @returns {Promise<boolean>} A promise that resolves to true if the image is valid, false otherwise.
+ * @param {HTMLInputElement} input - The input element containing the file to validate.
+ * @param {number} [maxWidth=250] - The maximum allowed width for the image.
+ * @param {number} [maxHeight=250] - The maximum allowed height for the image.
+ * @returns {Promise<boolean>} A promise that resolves to true if the image is valid, otherwise false.
  */
 export async function validateImage(input, maxWidth = 250, maxHeight = 250) {
   const file = input.files[0];

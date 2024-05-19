@@ -2,6 +2,14 @@ import { openModal } from "./postModal.mjs";
 import { getLocal } from "../../storage/storage.mjs";
 import { API_SOCIAL } from "../../constants.mjs";
 
+/**
+ * Updates the post content in the UI modal.
+ *
+ * @param {Object} updatedPost - The updated post data.
+ * @param {string} updatedPost.title - The title of the post.
+ * @param {string} updatedPost.body - The body content of the post.
+ * @param {string} updatedPost.media - The media URL of the post.
+ */
 function updatePostInUI(updatedPost) {
   const modalTitle = document.getElementById("postModalLabel");
   const modalBody = document.getElementById("postModalBody");
@@ -18,6 +26,17 @@ function updatePostInUI(updatedPost) {
   }
 }
 
+/**
+ * Sends an update request to the server to update a post.
+ *
+ * @param {string} postId - The ID of the post to update.
+ * @param {string} title - The new title of the post.
+ * @param {string} body - The new body content of the post.
+ * @param {string} media - The new media URL of the post.
+ * @param {string} accessToken - The access token for authorization.
+ * @returns {Promise<Object>} A promise that resolves to the updated post data.
+ * @throws Will throw an error if the update request fails.
+ */
 async function sendUpdateRequest(postId, title, body, media, accessToken) {
   try {
     const response = await fetch(`${API_SOCIAL}/posts/${postId}`, {
@@ -41,6 +60,12 @@ async function sendUpdateRequest(postId, title, body, media, accessToken) {
   }
 }
 
+/**
+ * Handles the update post button click event.
+ *
+ * @param {Event} event - The click event object.
+ * @returns {Promise<void>}
+ */
 export async function handleUpdatePostClick(event) {
   event.preventDefault();
 
@@ -59,7 +84,6 @@ export async function handleUpdatePostClick(event) {
         media,
         accessToken
       );
-      console.log("Post updated:", updatedPost);
       updatePostInUI(updatedPost);
 
       const updatePostModal = document.getElementById("updatePostModal");

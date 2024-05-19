@@ -12,6 +12,14 @@ export const state = {
   currentSearchQuery: "",
 };
 
+/**
+ * Fetch and filter posts based on the current state and update the container with the results.
+ * @param {HTMLElement} container - The container element for displaying posts.
+ * @param {HTMLElement} postTemplate - The template element for posts.
+ * @param {HTMLSelectElement} [reactionsFilter] - The filter element for reactions.
+ * @param {HTMLSelectElement} [commentsFilter] - The filter element for comments.
+ * @returns {Promise<void>}
+ */
 export async function fetchAndFilterPosts(
   container,
   postTemplate,
@@ -32,8 +40,6 @@ export async function fetchAndFilterPosts(
       state.currentReactions,
       state.currentComments
     );
-
-    console.log("Posts fetched:", posts);
 
     if (state.currentSearchQuery) {
       const searchTerms = state.currentSearchQuery.toLowerCase().split(" ");

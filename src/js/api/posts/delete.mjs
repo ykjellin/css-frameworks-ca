@@ -4,6 +4,13 @@ import { API_SOCIAL } from "../../constants.mjs";
 const action = "/posts";
 const method = "delete";
 
+/**
+ * Deletes a post by its ID.
+ *
+ * @param {string} id - The ID of the post to delete.
+ * @returns {Promise<boolean>} A promise that resolves to true if the post was deleted successfully, otherwise false.
+ * @throws Will throw an error if the ID is not provided.
+ */
 export async function deletePost(id) {
   if (!id) {
     throw new Error(`Delete requires a postID`);
@@ -12,10 +19,7 @@ export async function deletePost(id) {
     const deletePostURL = `${API_SOCIAL}${action}/${id}`;
     const response = await authFetch(deletePostURL, { method });
 
-    console.log("Response status:", response.status); // Log the response status
-
     if (response.status === 204 || response.status === 200) {
-      console.log("Post deleted successfully");
       return true; // Indicate successful deletion
     } else {
       console.error(
@@ -29,10 +33,20 @@ export async function deletePost(id) {
   }
 }
 
+/**
+ * Confirms if the user wants to delete the post.
+ * @returns {boolean} True if the user confirms, otherwise false.
+ */
 function confirmDeletion() {
   return confirm("Are you sure you want to delete this post?");
 }
 
+/**
+ * Deletes a post by its ID and removes its element from the DOM if deletion is successful.
+ *
+ * @param {string} postId - The ID of the post to delete.
+ * @returns {Promise<void>}
+ */
 async function deletePostById(postId) {
   try {
     const success = await deletePost(postId);
@@ -53,6 +67,11 @@ async function deletePostById(postId) {
   }
 }
 
+/**
+ * Handles the delete post button click event.
+ *
+ * @param {Event} event - The click event object.
+ */
 export function handleDeletePostClick(event) {
   const target = event.target;
   const postId = target.getAttribute("data-post-id");

@@ -20,7 +20,6 @@
       src="https://kit.fontawesome.com/053b40ce4e.js"
       crossorigin="anonymous"
     ></script>
-    <script src="/scripts/script.js"></script>
   </head>
   <body>
     <header>
@@ -77,7 +76,6 @@
             >
               Create New Post
             </button>
-
           </div>
         </div>
       </nav>
@@ -86,7 +84,11 @@
       <!-- Profile Information -->
       <div class="text-center mt-5">
         <div class="profile-wrap">
-          <img id="profileImage" class="rounded-circle profile-image" alt="Profile Image" />
+          <img
+            id="profileImage"
+            class="rounded-circle profile-image"
+            alt="Profile Image"
+          />
         </div>
         <h2 id="username"></h2>
         <p id="email"></p>
@@ -94,20 +96,38 @@
       <!-- Followers/Following -->
       <div class="d-flex justify-content-center mt-3">
         <button id="followButton" class="btn btn-warning me-2">Follow</button>
-        <button id="unfollowButton" class="btn btn-warning me-2">Unfollow</button>
-        <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#updateMediaModal">
+        <button id="unfollowButton" class="btn btn-warning me-2">
+          Unfollow
+        </button>
+        <button
+          type="button"
+          class="btn btn-warning me-2"
+          data-bs-toggle="modal"
+          data-bs-target="#updateMediaModal"
+        >
           Update Profile
         </button>
         <div><strong id="followersCount"></strong> followers</div>
         <div class="ms-2"><strong id="followingCount"></strong> following</div>
       </div>
       <!-- Update Media Modal -->
-      <div class="modal fade" id="updateMediaModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="updateMediaModal"
+        tabindex="-1"
+        aria-labelledby="modalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="modalLabel">Update Profile Media</h5>
-              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <button
+                type="button"
+                class="close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -115,11 +135,23 @@
               <form id="updateMediaForm">
                 <div class="mb-3">
                   <label for="avatar" class="form-label">Avatar URL:</label>
-                  <input type="url" class="form-control" id="avatar" name="avatar" placeholder="http://example.com/avatar.jpg">
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="avatar"
+                    name="avatar"
+                    placeholder="http://example.com/avatar.jpg"
+                  />
                 </div>
                 <div class="mb-3">
                   <label for="banner" class="form-label">Banner URL:</label>
-                  <input type="url" class="form-control" id="banner" name="banner" placeholder="http://example.com/banner.jpg">
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="banner"
+                    name="banner"
+                    placeholder="http://example.com/banner.jpg"
+                  />
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
               </form>
@@ -128,30 +160,68 @@
         </div>
       </div>
       <!-- Create Post Modal -->
-      <div class="modal fade" id="createProfilePostModal" tabindex="-1" aria-labelledby="createProfilePostModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="createProfilePostModal"
+        tabindex="-1"
+        aria-labelledby="createProfilePostModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="createProfilePostModalLabel">Create New Post</h5>
-              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <h5 class="modal-title" id="createProfilePostModalLabel">
+                Create New Post
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <form id="createProfilePostForm">
                 <div class="mb-3">
-                  <label for="profilePostTitle" class="form-label">Title:</label>
-                  <input type="text" class="form-control" id="profilePostTitle" name="title" required>
+                  <label for="profilePostTitle" class="form-label"
+                    >Title:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="profilePostTitle"
+                    name="title"
+                    required
+                  />
                 </div>
                 <div class="mb-3">
-                  <label for="profilePostContent" class="form-label">Content:</label>
-                  <textarea class="form-control" id="profilePostContent" name="content" rows="3" required></textarea>
+                  <label for="profilePostContent" class="form-label"
+                    >Content:</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="profilePostContent"
+                    name="content"
+                    rows="3"
+                    required
+                  ></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="profilePostImage" class="form-label">Image URL:</label>
-                  <input type="url" class="form-control" id="profilePostImage" name="image">
+                  <label for="profilePostImage" class="form-label"
+                    >Image URL:</label
+                  >
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="profilePostImage"
+                    name="image"
+                  />
                 </div>
-                <button type="submit" class="btn btn-primary">Create Post</button>
+                <button type="submit" class="btn btn-primary">
+                  Create Post
+                </button>
               </form>
             </div>
           </div>
@@ -187,9 +257,78 @@
       </div>
     </div>
     <footer class="text-center text-lg-start bg-secondary text-muted">
-      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom border-warning">
+      <section
+        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom border-warning"
+      >
         <div class="me-5 d-none d-lg-block text-warning">
           <span>Connect with us on social media:</span>
         </div>
+
         <div>
-          <a href="https://www
+          <a href="https://www.facebook.com/" class="me-4 text-reset">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="" class="me-4 text-reset">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <div class="container text-center text-md-start mt-5">
+          <div class="row mt-3">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4 text-warning">
+                <i class="fas fa-gem me-3"></i>Social Website
+              </h6>
+              <p class="text-warning">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+                dicta numquam nesciunt cumque facere iusto suscipit nulla.
+                Aliquam, fuga provident. Non excepturi asperiores minus
+                temporibus earum architecto explicabo dolor recusandae?
+              </p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <h6 class="text-uppercase fw-bold mb-4 text-warning">
+                Placeholder
+              </h6>
+              <p>
+                <a href="#" class="link-warning">Test</a>
+              </p>
+              <p>
+                <a href="#" class="link-warning">Test</a>
+              </p>
+              <p>
+                <a href="#" class="link-warning">Test</a>
+              </p>
+              <p>
+                <a href="#" class="link-warning">Test</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="trademark-text" class="text-center p-4 text-warning">
+        <a
+          class="link-warning"
+          href="https://www.flaticon.com/free-icons/type"
+          title="type icons"
+          >Type icons created by xnimrodx - Flaticon</a
+        >
+        © 2024 Social Website, Inc
+      </div>
+    </footer>
+
+    <!--    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+
+    <script src="/src/js/api/profile/index.mjs"></script>
+  </body>
+</html>

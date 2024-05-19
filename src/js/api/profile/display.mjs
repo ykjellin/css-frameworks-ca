@@ -1,5 +1,21 @@
 import { openModal } from "./postModal.mjs";
 
+/**
+ * Creates a post element from a template and fills it with post data.
+ *
+ * @param {Object} post - The post data.
+ * @param {string} post.id - The ID of the post.
+ * @param {string} post.media - The media URL of the post.
+ * @param {string} post.title - The title of the post.
+ * @param {string} post.body - The body content of the post.
+ * @param {string} post.created - The creation date of the post.
+ * @param {Object} post._count - The count of comments and reactions.
+ * @param {number} post._count.comments - The number of comments on the post.
+ * @param {number} post._count.reactions - The number of reactions on the post.
+ * @param {HTMLTemplateElement} postTemplate - The template element for posts.
+ * @returns {DocumentFragment} The created post element.
+ * @throws Will throw an error if the post template is not defined or is invalid.
+ */
 function createPostElement(post, postTemplate) {
   if (!postTemplate || !postTemplate.content) {
     throw new Error("Post template is not defined or is invalid.");
@@ -44,6 +60,16 @@ function createPostElement(post, postTemplate) {
   return postElement;
 }
 
+/**
+ * Creates a "Load More" button for loading more posts.
+ *
+ * @param {Function} loadMorePosts - The function to call to load more posts.
+ * @param {number} PAGE_SIZE - The number of posts to load per page.
+ * @param {number} currentOffset - The current offset for pagination.
+ * @param {HTMLElement} container - The container element for posts.
+ * @param {HTMLTemplateElement} postTemplate - The template element for posts.
+ * @returns {HTMLButtonElement} The created "Load More" button.
+ */
 function createLoadMoreButton(
   loadMorePosts,
   PAGE_SIZE,
@@ -60,6 +86,16 @@ function createLoadMoreButton(
   return loadMoreButton;
 }
 
+/**
+ * Displays posts in the specified container and adds a "Load More" button if necessary.
+ *
+ * @param {Array<Object>} posts - The array of post data to display.
+ * @param {HTMLElement} container - The container element for displaying posts.
+ * @param {HTMLTemplateElement} postTemplate - The template element for posts.
+ * @param {number} currentOffset - The current offset for pagination.
+ * @param {number} PAGE_SIZE - The number of posts to load per page.
+ * @param {Function} loadMorePosts - The function to call to load more posts.
+ */
 export function displayPosts(
   posts,
   container,
