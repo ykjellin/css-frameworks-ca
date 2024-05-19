@@ -49,8 +49,6 @@ export async function fetchAndFilterPosts(
       state.currentComments
     );
 
-    console.log("Posts fetched:", posts);
-
     if (state.currentSearchQuery) {
       const searchTerms = state.currentSearchQuery.toLowerCase().split(" ");
       filteredPosts = filteredPosts.filter((post) => {
