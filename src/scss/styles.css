@@ -10858,6 +10858,15 @@ body {
   background-color: #585755;
 }
 
+#postImage {
+  max-width: 100%;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 footer {
   margin-top: 3rem;
   opacity: 0;

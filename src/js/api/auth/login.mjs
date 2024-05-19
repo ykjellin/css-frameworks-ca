@@ -1,3 +1,4 @@
+// login.mjs
 import { API_SOCIAL } from "../../constants.mjs";
 import { saveLocal, getLocal, removeLocal } from "../../storage/storage.mjs";
 
@@ -5,23 +6,21 @@ const action = "/auth/login";
 const method = "post";
 const loginURL = `${API_SOCIAL}${action}`;
 
-/**
- * Handles the login form submission.
- *
- * @param {Event} event - The form submission event.
- */
 export async function handleLoginSubmit(event) {
   event.preventDefault();
-
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
   const credentials = { email, password };
 
   try {
     const loginResponse = await login(credentials);
-    saveLocal("accessToken", loginResponse.accessToken);
-    saveLocal("name", loginResponse.name);
-    window.location.href = "/feed/";
+    saveLocal("userData", {
+      accessToken: loginResponse.accessToken,
+      name: loginResponse.name,
+      email: loginResponse.email,
+      avatar: loginResponse.avatar,
+    });
+    window.location.href = "/feed/"; // Redirect user to the feed page or dashboard
   } catch (error) {
     console.error("Error during login:", error);
     const errorMessage = document.querySelector(".errorMessage");
@@ -31,24 +30,12 @@ export async function handleLoginSubmit(event) {
   }
 }
 
-/**
- * Sends login credentials to the server and returns the response data.
- *
- * @param {Object} credentials - The login credentials.
- * @param {string} credentials.email - The user's email.
- * @param {string} credentials.password - The user's password.
- * @returns {Promise<Object>} The server response data.
- * @throws {Error} If the login request fails.
- */
 async function login(credentials) {
   const errorMessage = document.querySelector(".errorMessage");
-
   try {
     const body = JSON.stringify(credentials);
     const response = await fetch(loginURL, {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       method: "POST",
       body: body,
     });
@@ -58,8 +45,7 @@ async function login(credentials) {
       throw new Error(errorData.message || "Login failed");
     }
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     if (errorMessage) {
       errorMessage.textContent = error.message;
