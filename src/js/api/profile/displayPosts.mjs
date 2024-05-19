@@ -8,7 +8,8 @@ export function displayPosts(posts) {
   posts.forEach((post) => {
     const postClone = template.content.cloneNode(true);
     postClone.querySelector(".card-img-top").src =
-      post.media || "path/to/default/post-image.png";
+      post.media ||
+      "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg";
     postClone.querySelector(".card-title").textContent = post.title;
     postClone.querySelector(".card-text").textContent = post.body;
     const readMoreBtn = postClone.querySelector(".btn.read-more-btn");
