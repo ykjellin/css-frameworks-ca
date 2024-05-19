@@ -41,16 +41,26 @@ function observeDisplayChanges() {
  * @param {HTMLElement} deleteButton - The button element for deleting the post.
  * @returns {Function} The event handler function.
  */
-function handleModalShown(post, updateButton, deleteButton) {
+function handleModalShown(
+  { id, title, media, body },
+  updateButton,
+  deleteButton
+) {
   return function () {
-    document.getElementById("postModalLabel").textContent = post.title;
-    document.getElementById("postModalImage").src = post.media;
-    document.getElementById("postModalBody").textContent = post.body;
+    const [modalTitle, modalImage, modalBody] = [
+      document.getElementById("postModalLabel"),
+      document.getElementById("postModalImage"),
+      document.getElementById("postModalBody"),
+    ];
+
+    modalTitle.textContent = title;
+    modalImage.src = media;
+    modalBody.textContent = body;
 
     updateButton.style.display = "inline-block";
-    updateButton.setAttribute("data-post-id", post.id);
+    updateButton.setAttribute("data-post-id", id);
 
-    deleteButton.setAttribute("data-post-id", post.id);
+    deleteButton.setAttribute("data-post-id", id);
     deleteButton.addEventListener("click", handleDeletePostClick);
   };
 }
@@ -75,35 +85,40 @@ function handleModalHidden(deleteButton) {
 }
 
 /**
- * Opens the modal to display a post.
+ * Opens a modal with post details.
  *
  * @param {Object} post - The post data.
- * @param {string} post.id - The ID of the post.
  * @param {string} post.title - The title of the post.
- * @param {string} post.media - The media URL of the post.
+ * @param {string} [post.media] - The URL of the post's media.
  * @param {string} post.body - The body content of the post.
+ * @param {string} post.id - The ID of the post.
  */
-export function openModal(post) {
+export function openModal({ title, media, body, id }) {
   const modalElement = document.getElementById("postModal");
   const modal = new bootstrap.Modal(modalElement);
 
-  const updateButton = modalElement.querySelector(".update-open-btn");
-  const deleteButton = modalElement.querySelector(".delete-post-btn");
+  const [updateButton, deleteButton] = [
+    modalElement.querySelector(".update-open-btn"),
+    modalElement.querySelector(".delete-post-btn"),
+  ];
 
   modalElement.addEventListener("shown.bs.modal", () => {
-    document.getElementById("postModalLabel").textContent = post.title;
+    const [modalTitle, modalImage, modalBody] = [
+      document.getElementById("postModalLabel"),
+      document.getElementById("postModalImage"),
+      document.getElementById("postModalBody"),
+    ];
 
+    modalTitle.textContent = title;
     const defaultImageURL =
       "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg";
-    document.getElementById("postModalImage").src =
-      post.media || defaultImageURL;
-
-    document.getElementById("postModalBody").textContent = post.body;
+    modalImage.src = media || defaultImageURL;
+    modalBody.textContent = body;
 
     updateButton.style.display = "inline-block";
-    updateButton.setAttribute("data-post-id", post.id);
+    updateButton.setAttribute("data-post-id", id);
 
-    deleteButton.setAttribute("data-post-id", post.id);
+    deleteButton.setAttribute("data-post-id", id);
     deleteButton.addEventListener("click", handleDeletePostClick);
   });
 
@@ -117,10 +132,11 @@ export function openModal(post) {
     deleteButton.removeEventListener("click", handleDeletePostClick);
   });
 
-  handleUpdatePostClick(post);
+  handleUpdatePostClick({ title, media, body, id });
 
   modal.show();
 }
+
 
 /**
  * Opens the modal to update a post.
@@ -131,9 +147,11 @@ export function openModal(post) {
  * @param {string} post.media - The media URL of the post.
  * @param {string} post.body - The body content of the post.
  */
-export function openUpdateModal(post) {
-  const updatePostModal = document.getElementById("updatePostModal");
-  const updatePostForm = document.getElementById("updatePostForm");
+export function openUpdateModal({ id, title, body, media }) {
+  const [updatePostModal, updatePostForm] = [
+    document.getElementById("updatePostModal"),
+    document.getElementById("updatePostForm"),
+  ];
 
   if (!updatePostModal || !updatePostForm) {
     console.error("Update post modal or form element not found.");
@@ -144,10 +162,10 @@ export function openUpdateModal(post) {
 
   const modal = new bootstrap.Modal(updatePostModal);
 
-  document.getElementById("updatePostId").value = post.id;
-  document.getElementById("updatePostTitle").value = post.title;
-  document.getElementById("updatePostBody").value = post.body;
-  document.getElementById("updatePostMedia").value = post.media;
+  document.getElementById("updatePostId").value = id;
+  document.getElementById("updatePostTitle").value = title;
+  document.getElementById("updatePostBody").value = body;
+  document.getElementById("updatePostMedia").value = media;
 
   updatePostForm.style.display = "block";
 

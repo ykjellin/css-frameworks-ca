@@ -6,19 +6,24 @@ import {
 import { setupEventListeners } from "../../handlers/setupEventListeners.mjs";
 import { setupCreatePostModal } from "../posts/create.mjs";
 
+/**
+ * Event listener for the DOMContentLoaded event.
+ * Performs initial setup and fetches posts.
+ *
+ * @async
+ */
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("postsContainer");
   const postTemplate = document.getElementById("postTemplate");
+  const reactionsFilter = document.getElementById("reactionsFilter");
+  const commentsFilter = document.getElementById("commentsFilter");
+  const searchButton = document.getElementById("searchButton");
+  const searchInput = document.getElementById("searchInput");
 
   if (!postTemplate) {
     console.error("Post template not found in the DOM.");
     return;
   }
-
-  const reactionsFilter = document.getElementById("reactionsFilter");
-  const commentsFilter = document.getElementById("commentsFilter");
-  const searchButton = document.getElementById("searchButton");
-  const searchInput = document.getElementById("searchInput");
 
   setupEventListeners(
     container,
@@ -59,8 +64,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
+/**
+ * Event listener for the window scroll event.
+ * Adjusts the opacity of the footer based on the scroll position.
+ */
 window.addEventListener("scroll", () => {
-  const footer = document.querySelector("footer");
+  const [footer] = document.querySelectorAll("footer");
   if (footer) {
     footer.style.opacity = window.scrollY > 0 ? 1 : 0;
   }
