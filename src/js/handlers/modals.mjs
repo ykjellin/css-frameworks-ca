@@ -2,10 +2,6 @@ import { getPostById } from "../api/posts/get.mjs";
 import { openModal, openUpdateModal } from "../api/posts/postModal.mjs";
 import { handleDeletePostClick } from "../api/posts/delete.mjs";
 
-/**
- * Handle click events on post elements for viewing, updating, or deleting posts.
- * @param {Event} event - The click event object.
- */
 export async function handleViewPostClick(event) {
   const target = event.target;
 
